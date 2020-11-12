@@ -1,2 +1,2 @@
 # Sidetracked
-fully modular collaboration platform
+Fully modular collaboration platform
