@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from flask_restful import Resource, Api
 
 
@@ -13,9 +13,11 @@ api = Api(app)
 
 class index(Resource):
     def get(self):
-        return render_template("index.html")
+        response = make_response(render_template('index.html'))
+        response.headers['Content-type'] = 'text/html'
+        return response
 
-# returning request.get_json is just for lack of anything else and will not be the case in the end
+#returning request.get_json is just for lack of anything else and will not be the case in the end
 
 class api_files(Resource):
     def get(self):
