@@ -17,6 +17,14 @@ class index(Resource):
         response.headers['Content-type'] = 'text/html'
         return response
 
+
+class auth(Resource):
+    def get(self):
+        response = make_response('something')
+        response.set_cookie('flag{your_cookie}')
+        return response
+
+
 #returning request.get_json is just for lack of anything else and will not be the case in the end
 
 class api_files(Resource):
@@ -41,6 +49,7 @@ class api_heartbeat(Resource):
 
 
 api.add_resource(index, '/')
+api.add_resource(auth, '/auth')
 api.add_resource(api_ls, '/api/v0/ls/')
 api.add_resource(api_files, '/api/v0/file/')
 api.add_resource(api_heartbeat, '/api/v0/hearbeat/')
