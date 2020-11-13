@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-				<div style={{  height: "100vh", width: "100%", backgroundColor:"#c1c1c1"}}>
+				<div style={{  height: "100vh", width: "100%", backgroundColor:"#2C2F33"}}>
           <HomePage />
 				</div>
       </div>
