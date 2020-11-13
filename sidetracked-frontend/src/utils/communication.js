@@ -1,43 +1,45 @@
 // This file contains all the routes to the backend
 
 const request = require('request');
-const server_url = 'localhost:8080'
+const fetch = require("node-fetch");
+const server_url = 'http://localhost:5000'
 
-function tick(file_name = null) {
+function tick(json_data = null) {
     request({ 
-        body: {}, 
+        body: json_data, 
         followAllRedirects: true,
         headers: {
            'Content-Type': 'application/json',
-           'Referer': 'www.pathofexile.com/trade/search/Incursion',
-           'Host': 'www.pathofexile.com',
+           'Host': server_url + "/tick",
            'X-Requested-With': 'XMLHttpRequest' },
         method: 'POST',
         url: server_url + "/tick"
     }, handle_tick);
 }
 
-function sendFile(file) {
+function sendFile(json_data) {
     request({ 
-        body: {}, 
+        body: json_data, 
         followAllRedirects: true,
         headers: {
            'Content-Type': 'application/json',
            'X-Requested-With': 'XMLHttpRequest' },
         method: 'UPDATE',
-        url: server_url + "/sendFile"
+        url: server_url + "/api/v0/file/"
     }, handle_sendFile);
 }
 
-function getFile(file_name) {
+async function getFile(json_data) {
+    url_t = server_url + "/api/v0/file/"
+    console.log(url_t)
     request({ 
-        body: {}, 
+        body: JSON.stringify(json_data), 
         followAllRedirects: true,
         headers: {
            'Content-Type': 'application/json',
-           'X-Requested-With': 'XMLHttpRequest' },
+        },
         method: 'GET',
-        url: server_url + "/getFile"
+        url: url_t
     }, handle_getFile);
 }
 
@@ -84,3 +86,5 @@ function handle_listFiles(error, response, body) {
         console.log("listFiles Failed: \n" + body);
     }
 };
+
+module.exports = { getFile: getFile }

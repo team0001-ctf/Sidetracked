@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, jsonify, json
 from flask_restful import Resource, Api
 
 
@@ -29,11 +29,11 @@ class auth(Resource):
 
 class api_files(Resource):
     def get(self):
-        response = download_files(request.get_json)
-        return request.get_json(), response
+        response = download_files(request.json)
+        return response
     def post(self):
-        response = upload_files(request.get_json)
-        return request.get_json(), response
+        response = upload_files(request.json)
+        return response
 
 
 class api_ls(Resource):
