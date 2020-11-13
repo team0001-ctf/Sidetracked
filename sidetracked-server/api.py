@@ -43,10 +43,34 @@ def download_files(json_data):
     r_json = jsonify(file=json_data["file"], data=str(r))
     return r_json
 
+
+
 def list_files(json_data):
-    # do the things needed
+    # stuff sent from client:
+    # {
+    #   file_editing: "balh",
+    #   cursor_loc, [0,1]
+    # }
+    # response:
+    # {
+    #    file: "balh",
+    #    modified: true,
+    #    data: "xyz",
+    #    users: [
+    #         "person1": [1, 2],
+    #         "person2": [3, 2] 
+    #        ] 
+    # }
+
+    # hearbeats from single user
+    cursor_loc = json_data['cursor_loc']
+    file_editing = json_data['file_editing']
+
+    # TODO add redis server stuff
+
     return 200
 
+# should file deltas be in the heartbeat?
 def hearbeat(json_data):
     # do the things needed
     return 200
