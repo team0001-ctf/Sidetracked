@@ -1,4 +1,5 @@
 from flask import jsonify, json
+from server_logs import logger as log
 # import base64 # uncomment if we want to compress our data
 # import zlib # uncomment if we want to compress our data
 
@@ -26,7 +27,8 @@ def download_files(json_data):
         # open files for reading
         f = open("root" + json_data["file"], "r")
     except IOError:
-        # @TODO Maybe a better error code here?
+        log(level='error', msg='no file')
+
         return 300
     # read data into an object to send back to client
     # @note: This can be a hard reset on a file just incase something
