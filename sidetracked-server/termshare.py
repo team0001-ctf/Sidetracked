@@ -37,6 +37,7 @@ class FakeTerm:
                 finally:
                     capture = {'command':None,'output':None}
 
+# server side                    
 class TermShare:
     def __init__(self,lport=9000):
         self.lport = lport
