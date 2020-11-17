@@ -40,7 +40,7 @@ class api_files(Resource):
 
 class api_ls(Resource):
     def get(self):
-        response = list_files(request.json)
+        response = list_files(request.headers)
         return response
 
 

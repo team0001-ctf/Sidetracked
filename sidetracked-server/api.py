@@ -48,10 +48,10 @@ def download_files(json_data):
 # {
 #     "dir_name": "/"
 # }
-def list_files(json_data):
+def list_files(header_data):
     # This is def not safe...
-    tmp = os.popen("ls root/" + json_data["dir_name"]).read().replace("\n"," ")
-    return jsonify(files=str(tmp[:-1]))
+    ls_res = os.popen("ls root" + header_data["dir_name"]).read().replace("\n"," ")
+    return jsonify(file=ls_res[:-1])
 
 def hearbeat(json_data):
     # do the things needed
