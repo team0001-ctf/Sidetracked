@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# server must be run with python 3.6+
 from flask import Flask, render_template, request, make_response, jsonify, json
 from flask_restful import Resource, Api
 
@@ -56,4 +58,5 @@ api.add_resource(api_heartbeat, '/api/v0/hearbeat/')
 
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+

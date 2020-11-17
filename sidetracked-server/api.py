@@ -10,7 +10,8 @@ from sidetrack_logger import logger as log
 #}
 def upload_files(json_data):
     # open file with write perms
-    f = open("root" + json_data["file"], "w")
+    # TODO: fix path traversal bug here
+    f = open("root" + json_data["file"], "w+")
     # write the data sent to the file. @
     # @NOTE: We will want this to write the delta ast some point
     #        but for now we can just write the whole file.
