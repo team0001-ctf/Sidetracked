@@ -1,5 +1,6 @@
 from flask import jsonify, json
 from sidetrack_logger import logger as log
+import os
 # import base64 # uncomment if we want to compress our data
 # import zlib # uncomment if we want to compress our data
 
@@ -28,8 +29,8 @@ def download_files(json_data):
         f = open("root" + json_data["file"], "r")
     except IOError:
         log(level='error', msg='no file')
-
         return 300
+
     # read data into an object to send back to client
     # @note: This can be a hard reset on a file just incase something
     #        goes really bad on the client side with the state of a shared
@@ -43,9 +44,14 @@ def download_files(json_data):
     r_json = jsonify(file=json_data["file"], data=str(r))
     return r_json
 
+# Exmaple json sent from client
+# {
+#     "dir_name": "/"
+# }
 def list_files(json_data):
-    # do the things needed
-    return 200
+    # This is def not safe...
+    tmp = os.popen("ls root/" + json_data["dir_name"]).read().replace("\n"," ")
+    return jsonify(files=str(tmp[:-1]))
 
 def hearbeat(json_data):
     # do the things needed

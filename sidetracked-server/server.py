@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response, jsonify, json
 from flask_restful import Resource, Api
+from flask_cors import CORS
 
 
 from api import hearbeat
@@ -10,6 +11,7 @@ from api import download_files
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 class index(Resource):
     def get(self):
@@ -38,8 +40,8 @@ class api_files(Resource):
 
 class api_ls(Resource):
     def get(self):
-        response = list_files(request.get_json)
-        return request.get_json(), response
+        response = list_files(request.json)
+        return response
 
 
 class api_heartbeat(Resource):
