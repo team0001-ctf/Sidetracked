@@ -55,52 +55,42 @@ def download_files(json_data):
     return r_json
 
 # Exmaple json sent from client
-# {
-#     "dir_name": "/"
-# }
+# HEADER: { dir_name: "/" }
 def list_files(header_data):
-    #"files": [{
-    #    "file": "1.md",
-    #    "type": "/text/markdown"
-    #}, {
-    #    "file": "2.md",
-    #    "type": "/text/markdown"
-    #}, {
-    #    "file": "3.md",
-    #    "type": "/text/markdown"
-    #}]
-
     # @NOTE this is probably still vulnerable to path traversal and should be implemented properly
     path = header_data['dir_name']
-    path = f'root/{path}'
-    path = path.replace('..','')
+    # Set up the full path of where to `ls`
+    path = f'root{path}'
+    # Client should never .. , so lets just remove it
+    path = path.replace('/..','')
 
+    log(level='log', msg=f'accessing fies root{header_data["dir_name"]}')
 
-
-    log(level='log', msg=f'accessing fies root/{header_data["dir_name"]}')
-
-
+    # Get the list of files in the dir
     files = os.listdir(path)
 
-
+    # Set up json object that will be returned
     files_obj = {
             "files": []
             }
 
+    # Go through each file that was returned in our "listdir" command.
+    # This will figure out if it is a file or a directory.
     for item in files:
         if os.path.isdir(path+item):
             file_type = 'folder'
-        elif os.path.isfile(path+item):
+        elif os.path.isfile(path + item):
             file_type = 'file'
         else:
-            file_type = 'whatthefuck'
+            file_type = 'unknown'
 
-        a = {
-            "file": item,
+        # Set up a file object for each object
+        file_obj = {
+            'file': item,
             'type': file_type
                 }
-
-        files_obj['files'].append(a)
+        # append the file object onto the files json array that we will return
+        files_obj['files'].append(file_obj)
 
     return files_obj
 
