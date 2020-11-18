@@ -1,30 +1,31 @@
 
 import React, { Component } from 'react';
 import {
-    Box,
     Flex,
     Text,
-    Link,
     Button
 } from 'rebass'
-// import { Grid, Image, Button } from 'semantic-ui-react'
-// import { display } from 'styled-system';
 import './homePage.css'
-import ButtonBoot from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
+import Notes from "../Notes/notes"
+import {
+    HashRouter,
+    Route,
+    Link,
+} from "react-router-dom"
+
+
 
 class HomePage extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {}
     }
 
     render() {
-        console.log("HERE")
         return (
-            <div>
+            <div style={{  height: "100vh", width: "100%", backgroundColor:"#2C2F33"}}>
                 <Navbar bg="primary" variant="dark">
                     <Navbar.Brand href="#home">TEAM0001</Navbar.Brand>
                     <Nav className="mr-auto">
@@ -38,7 +39,7 @@ class HomePage extends React.Component {
                     {/* </Form> */}
                 </Navbar>
                 <Flex flexWrap='wrap' px={"8vw"} pt={"8vh"}>
-                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} backgroundColor="#007bff">
+                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.props.history.push({pathname: "/notespage", curr_dir: "/"})} backgroundColor="#007bff">
                         <Text
                             fontSize={ "40px" }
                             fontWeight='bold'
@@ -46,7 +47,7 @@ class HomePage extends React.Component {
                             Notes
                         </Text>
                     </Button>
-                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} backgroundColor="#007bff">
+                    {/* <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} backgroundColor="#007bff">
                         plugin 2
                     </Button>
                     <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} backgroundColor="#007bff">
@@ -66,7 +67,7 @@ class HomePage extends React.Component {
                     </Button>
                     <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} backgroundColor="#007bff">
                         plugin 8
-                    </Button>
+                    </Button> */}
                 </Flex>
             </div> 
         );
