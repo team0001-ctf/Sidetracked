@@ -11,6 +11,7 @@ from api import download_files
 
 app = Flask(__name__)
 api = Api(app)
+# TODO deal with security issues this brings
 CORS(app)
 
 class index(Resource):
@@ -34,6 +35,7 @@ class api_files(Resource):
         response = download_files(request.json)
         return response
     def post(self):
+        print(request.json)
         response = upload_files(request.json)
         return response
 
