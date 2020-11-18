@@ -1,1 +1,8 @@
 [0m[93m[ warning ] 1605274312.5687  ||  fuckthis
+[0m[1m[ log ] 1605689210.2761693  ||  accessing fies .
+[0m[1m[ log ] 1605689233.7400815  ||  accessing fies root/notes
+[0m[1m[ log ] 1605694388.9394479  ||  accessing fies root/note
+[0m[1m[ log ] 1605694390.6314983  ||  accessing fies root/../
+[0m[1m[ log ] 1605694392.841609  ||  accessing fies root/
+[0m[1m[ log ] 1605694401.6042073  ||  accessing fies root/../../../../../../
+[0m[1m[ log ] 1605694403.5367887  ||  accessing fies root//etc
