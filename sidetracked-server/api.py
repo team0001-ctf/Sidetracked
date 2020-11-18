@@ -49,9 +49,50 @@ def download_files(json_data):
 #     "dir_name": "/"
 # }
 def list_files(header_data):
-    # This is def not safe...
-    ls_res = os.popen("ls root" + header_data["dir_name"]).read().replace("\n"," ")
-    return jsonify(file=ls_res[:-1])
+    #"files": [{
+    #    "file": "1.md",
+    #    "type": "/text/markdown"
+    #}, {
+    #    "file": "2.md",
+    #    "type": "/text/markdown"
+    #}, {
+    #    "file": "3.md",
+    #    "type": "/text/markdown"
+    #}]
+
+    # @NOTE this is probably still vulnerable to path traversal and should be implemented properly
+    path = header_data['dir_name']
+    path = f'root/{path}'
+    path = path.replace('..','')
+
+
+
+    log(level='log', msg=f'accessing fies root/{header_data["dir_name"]}')
+
+
+    files = os.listdir(path)
+
+
+    files_obj = {
+            "files": []
+            }
+
+    for item in files:
+        if os.path.isdir(path):
+            file_type = 'folder'
+        elif os.path.isfile(path):
+            file_type = 'file'
+        else:
+            file_type = 'whatthefuck'
+
+        a = {
+            "file": item,
+            'type': file_type
+                }
+
+        files_obj['files'].append(a)
+
+    return files_obj
 
 def hearbeat(json_data):
     # do the things needed
