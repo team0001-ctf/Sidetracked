@@ -6,3 +6,11 @@
 [0m[1m[ log ] 1605694392.841609  ||  accessing fies root/
 [0m[1m[ log ] 1605694401.6042073  ||  accessing fies root/../../../../../../
 [0m[1m[ log ] 1605694403.5367887  ||  accessing fies root//etc
+[0m[1m[ log ] 1605739508.1919663  ||  writing file root/testfile
+[0m[1m[ log ] 1605739533.2556248  ||  accessing fies root/
+[0m[1m[ log ] 1605739636.8975854  ||  accessing fies root/
+[0m[1m[ log ] 1605739644.7517982  ||  accessing fies root/
+[0m[1m[ log ] 1605739922.0727243  ||  writing file root///LICENSE
+[0m[1m[ log ] 1605739931.5063353  ||  accessing fies root/
+[0m[1m[ log ] 1605740143.24968  ||  writing file root/testfile
+[0m[1m[ log ] 1605740146.6743352  ||  accessing fies root/

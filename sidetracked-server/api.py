@@ -1,6 +1,7 @@
 from flask import jsonify, json
 from sidetrack_logger import logger as log
 import os
+import base64
 # import base64 # uncomment if we want to compress our data
 # import zlib # uncomment if we want to compress our data
 
@@ -10,12 +11,21 @@ import os
 #    "data": "Here is the file2"
 #}
 def upload_files(json_data):
-    # open file with write perms
-    f = open("root" + json_data["file"], "w")
+
+    filepath = json_data['file']
+    filepath = f'root/{filepath}'.replace('..', '')
+
+    data = json_data['data']
+    data = base64.b64decode(data)
+
+    log(level='log', msg=f"writing file {filepath}")
+
+    with open(filepath, 'wb+')as outfile:
+        outfile.write(data)
+
     # write the data sent to the file. @
     # @NOTE: We will want this to write the delta ast some point
     #        but for now we can just write the whole file.
-    f.write(json_data["data"])
     return 200
 
 # Exmaple json sent from client
@@ -67,7 +77,7 @@ def list_files(header_data):
     # Go through each file that was returned in our "listdir" command.
     # This will figure out if it is a file or a directory.
     for item in files:
-        if os.path.isdir(path + item):
+        if os.path.isdir(path+item):
             file_type = 'folder'
         elif os.path.isfile(path + item):
             file_type = 'file'
