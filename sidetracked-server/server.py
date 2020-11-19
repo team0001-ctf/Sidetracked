@@ -14,6 +14,7 @@ api = Api(app)
 # TODO deal with security issues this brings
 CORS(app)
 
+
 class index(Resource):
     def get(self):
         response = make_response(render_template('index.html'))
@@ -32,12 +33,11 @@ class auth(Resource):
 
 class api_files(Resource):
     def get(self):
-        response = download_files(request.json)
-        return response
+        data, response= download_files(request.headers)
+        return data, response
     def post(self):
-        print(request.json)
-        response = upload_files(request.json)
-        return response
+        data, response = upload_files(request.json)
+        return data, response
 
 
 class api_ls(Resource):
