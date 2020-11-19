@@ -26,17 +26,25 @@ function sendFile(json_data) {
     }, handle_sendFile);
 }
 
-async function getFile(json_data) {
-    var url_t = server_url + "/api/v0/file/"
-    request({ 
-        body: JSON.stringify(json_data), 
+async function getFile(file, cb) {
+    var ret = "";
+    var url_t = server_url + "/api/v0/file/";
+    request({
         followAllRedirects: true,
         headers: {
-           'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
+            'file': file,
         },
         method: 'GET',
         url: url_t
-    }, handle_getFile);
+    }, function (error, res, body) {
+        if (!error && res.statusCode === 200) { 
+            cb(body)
+         } else {
+            cb(-1)
+         }
+    });
+    return ret;
 }
 
 function listFiles(dir_name, cb) {

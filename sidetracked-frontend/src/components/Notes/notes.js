@@ -36,9 +36,9 @@ class NotesPage extends React.Component {
         var ret = []
         for(var i = 0; i < this.state.curr_file_list.length; i++) {
             if(this.state.curr_file_list[i].type == "folder"){
-                var file_name = this.state.curr_file_list[i].file
+                let file_name_folder = this.state.curr_file_list[i].file
                 ret.push(
-                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.fetch_file_list(this.state.curr_dir_name + file_name + "/")} backgroundColor="#8d1417">
+                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.fetch_file_list(this.state.curr_dir_name + file_name_folder + "/")} backgroundColor="#8d1417">
                         <Text
                             fontSize={ "40px" }
                             fontWeight='bold'
@@ -48,9 +48,9 @@ class NotesPage extends React.Component {
                     </Button>
                 )
             } else {
-                var file_name = this.state.curr_file_list[i].file
+                let file_name_file = this.state.curr_file_list[i].file
                 ret.push(
-                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.props.history.push({pathname: "/editors/markdown", file_name: file_name})} backgroundColor="#007bff">
+                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.props.history.push({pathname: "/editors/markdown", file_name: this.state.curr_dir_name + file_name_file})} backgroundColor="#007bff">
                         <Text
                             fontSize={ "40px" }
                             fontWeight='bold'
@@ -77,8 +77,8 @@ class NotesPage extends React.Component {
     render() {
         return (
             <div style={{  height: "100vh", width: "100%", backgroundColor:"#2C2F33"}}>
-                <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand href="#home">TEAM0001</Navbar.Brand>
+                <Navbar bg="primary" variant="dark" style={{  height: "5vh" }}>
+                    <Navbar.Brand onClick={() => this.props.history.push({pathname: "/"})}>TEAM0001</Navbar.Brand>
                     <Nav className="mr-auto">
                     {/* <Nav.Link href="#home">Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>

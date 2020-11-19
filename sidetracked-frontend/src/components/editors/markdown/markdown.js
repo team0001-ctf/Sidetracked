@@ -8,6 +8,7 @@ import {
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import CodeMirror from "react-codemirror";
+import Comms from "../../../utils/communication"
 
 import 'codemirror/mode/jsx/jsx'
 import 'codemirror/lib/codemirror.css'
@@ -26,7 +27,7 @@ function SideTracksCodeMirror({ value, onChange }) {
 
     useEffect(() => {
         codemirrorRef.current.getCodeMirror().setValue(value);
-        codemirrorRef.current.getCodeMirror().setSize("100%", "100%")
+        codemirrorRef.current.getCodeMirror().setSize("100vw", "95vh")
     }, []);
   
     return (
@@ -56,10 +57,22 @@ class Markdown extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            code: "# This is test code",
-            readOnly: false,
-            mode: 'markdown'
+            code: "# UNABLE TO LOAD RIP",
+            file_name: props.location.file_name
         }
+        console.log("MARKDOWN STARTING")
+        this.downloadfile()
+    }
+
+    downloadfile() {
+        Comms.getFile(this.state.file_name, (body) => {
+            var res_json = JSON.parse(body);
+            console.log(res_json);
+            // this.setState({ 
+            //     curr_file_list: res_json["files"],
+            //     curr_dir_name: dir_name
+            // })
+        })
     }
 
 	updateCode(newCode) {
@@ -69,16 +82,13 @@ class Markdown extends React.Component {
 
     render() {
         return (
-            <div style={{  height: "100vh", width: "100vw", backgroundColor:"#2C2F33" }}>
-                <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand href="#home">TEAM0001</Navbar.Brand>
+            <div style={{  height: "100vh", width: "100vw", backgroundColor:"#1e2227" }}>
+                <Navbar bg="primary" variant="dark" style={{  height: "5vh" }}>
+                    <Navbar.Brand onClick={() => this.props.history.push({pathname: "/"})}>TEAM0001</Navbar.Brand>
                         <Nav className="mr-auto" />
                 </Navbar>
 
-                
-                {/* <div style={{ height: "80%", backgroundColor:"white" }}> */}
-                    <SideTracksCodeMirror name="formula" onChange={this.updateCode} value={this.state.code} />
-                {/* </div> */}
+                <SideTracksCodeMirror name="formula" onChange={this.updateCode} value={this.state.code} />
             </div>
 
         )

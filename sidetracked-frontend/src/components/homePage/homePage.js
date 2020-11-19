@@ -26,8 +26,8 @@ class HomePage extends React.Component {
     render() {
         return (
             <div style={{  height: "100vh", width: "100%", backgroundColor:"#2C2F33"}}>
-                <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand href="#home">TEAM0001</Navbar.Brand>
+                <Navbar bg="primary" variant="dark" style={{  height: "5vh" }}>
+                    <Navbar.Brand onClick={() => this.props.history.push({pathname: "/"})}>TEAM0001</Navbar.Brand>
                     <Nav className="mr-auto">
                     {/* <Nav.Link href="#home">Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>
