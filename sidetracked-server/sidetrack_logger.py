@@ -1,4 +1,5 @@
 import time
+import os
 
 # the class stays here so we can easily add new templates if needed
 class colours:
@@ -29,6 +30,10 @@ colour_templates = {
 
 # main logger function
 def logger(level='log', msg=""):
+
+    if not os.path.exists('./logs'):
+        os.mkdir('./logs')
+
     # level = the type of log [colours, etc]
     level = level.lower()
     msg_log = colour_templates[level] + f"[ {level} ] {time.time()}  ||  {msg}"

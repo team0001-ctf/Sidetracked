@@ -28,7 +28,7 @@ def upload_files(json_data):
         filepath = f'root{filepath}'.replace('..', '')
     except:
         # on fail return that along side with a client erorr response
-        # log(level='error', msg=f"malformed request sent from client")
+        log(level='error', msg=f"malformed request sent from client")
         return 'malformed request sent from client, server needs json {"file": filename, "data": base64(filedata)}', 400
 
 
@@ -39,11 +39,11 @@ def upload_files(json_data):
     except:
         # this will probably occur if the path to file does not exist, 
         # TODO write a seperate check for this
-        # log(level='log', msg=f"failed to write file to server, perhaps this path does not exist {filepath}")
+        log(level='log', msg=f"failed to write file to server, perhaps this path does not exist {filepath}")
         return "failed to write file to server, perhaps this path does not exist {filepath}", 500
 
 
-    # log(level='log', msg=f"file: {filepath}, written to server")
+    log(level='log', msg=f"file: {filepath}, written to server")
 
 
     return 'file written successfully', 200
@@ -59,14 +59,14 @@ def download_files(header_data):
         filepath = 'root'+header_data['file']
     except:
         # malformed request
-        # log(level='error', msg=f"malformed request sent from client")
+        log(level='error', msg=f"malformed request sent from client")
         return "malformed request sent from client, server needs json: {'file': filepath_on_server}", 400
 
 
     # isfiel checks both the existance of the file and weather or not its a file
     if not os.path.isfile(filepath):
         # log and respond if file either doesnt exist or is not a fiel
-        # log(level='error', msg=f"file {filepath} not found on the server")
+        log(level='error', msg=f"file {filepath} not found on the server")
         return "requested file was not found on the server, OR is not of type 'file'", 404
 
     try:
@@ -75,23 +75,23 @@ def download_files(header_data):
             data = infile.read()
     except:
         # this should not happen, but im sure there is some way it occurs
-        # log(level='error', msg=f'an error occured while reading file:  {filepath}')
+        log(level='error', msg=f'an error occured while reading file:  {filepath}')
         return "an error occured while reading file: {filepath}", 500
 
     # L O G
-    # log(level='log', msg=f'returning file:  {filepath}')
+    log(level='log', msg=f'returning file:  {filepath}')
 
     # dont alert client just warn for 0 length file
         # honestly not sure if we need this but seemed smart
-    # if len(data) == 0:
-        # log(level='warning', msg=f"file: {filepath} has length of 0")
+    if len(data) == 0:
+     log(level='warning', msg=f"file: {filepath} has length of 0")
 
     try:
         # attempt to encode data
         data = base64.b64encode(data).decode('utf-8')
     except:
         # failed to encode data
-        # log(level='error', msg=f"file data malformed [{filepath}]")
+        log(level='error', msg=f"file data malformed [{filepath}]")
         return "file data on server malformed", 500
 
     json = {
@@ -136,7 +136,7 @@ def list_files(header_data):
     # Client should never .. , so lets just remove it
     path = path.replace('/..','')
 
-    # log(level='log', msg=f'accessing fies root{header_data["dir_name"]}')
+    log(level='log', msg=f'accessing fies root{header_data["dir_name"]}')
 
     # Get the list of files in the dir
     files = os.listdir(path)
