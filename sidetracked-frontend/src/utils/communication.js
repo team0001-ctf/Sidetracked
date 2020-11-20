@@ -15,15 +15,18 @@ function tick(json_data = null) {
 }
 
 function sendFile(json_data) {
-    request({ 
-        body: json_data, 
+    var ret = "";
+    var url_t = server_url + "/api/v0/file/";
+    request({
+        body: JSON.stringify(json_data),
         followAllRedirects: true,
         headers: {
-           'Content-Type': 'application/json',
-           'X-Requested-With': 'XMLHttpRequest' },
-        method: 'UPDATE',
-        url: server_url + "/api/v0/file/"
-    }, handle_sendFile);
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        url: url_t
+    }, function (error, res, body) {});
+    return ret;
 }
 
 async function getFile(file, cb) {
@@ -76,24 +79,9 @@ function handle_tick(error, response, body) {
     }
 };
 
-function handle_sendFile(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log('sendFile received: \n' + body);
-    } else {
-        console.log("sendFile Failed: \n" + body);
-    }
-};
-
-function handle_getFile(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        console.log('getFile received: \n' + body);
-    } else {
-        console.log("getFile Failed: \n" + body);
-    }
-};
-
 module.exports = 
 { 
     getFile: getFile,
-    listFiles: listFiles 
+    listFiles: listFiles ,
+    sendFile: sendFile
 }

@@ -17,7 +17,7 @@ import base64
 #}
 def upload_files(json_data):
     # write the data sent to the file. @
-    # @NOTE: We will want this to write the delta ast some point
+    # @NOTE: We will want this to write the delta at some point
     #        but for now we can just write the whole file.
 
     try:
@@ -25,7 +25,7 @@ def upload_files(json_data):
         filepath = json_data['file']
         data = json_data['data']
         data = base64.b64decode(data)
-        filepath = f'root/{filepath}'.replace('..', '')
+        filepath = f'root{filepath}'.replace('..', '')
     except:
         # on fail return that along side with a client erorr response
         log(level='error', msg=f"malformed request sent from client")
@@ -53,10 +53,10 @@ def upload_files(json_data):
 #{
 #    "file": "/notes/testNote.md",
 #}
-def download_files(json_data):
+def download_files(header_data):
     try:
         # attempt to get requested file from client
-        filepath = 'root/'+json_data['file']
+        filepath = 'root'+header_data['file']
     except:
         # malformed request
         log(level='error', msg=f"malformed request sent from client")
