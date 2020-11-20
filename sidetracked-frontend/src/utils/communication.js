@@ -51,7 +51,6 @@ async function getFile(file, cb) {
 }
 
 function listFiles(dir_name, cb) {
-    var ret = "";
     var url_t = server_url + "/api/v0/ls/";
     request({
         followAllRedirects: true,
@@ -68,7 +67,26 @@ function listFiles(dir_name, cb) {
             cb(-1)
          }
     });
-    return ret;
+}
+
+function exeFile(cmd, file, cb) {
+    var url_t = server_url + "/api/v0/exe/";
+    request({
+        followAllRedirects: true,
+        headers: {
+            'Content-Type': 'application/json',
+            'cmd': cmd,
+            'file': file,
+        },
+        method: 'GET',
+        url: url_t
+    }, function (error, res, body) {
+        if (!error && res.statusCode === 200) { 
+            cb(body)
+         } else {
+            cb(-1)
+         }
+    });
 }
 
 function handle_tick(error, response, body) {
@@ -82,6 +100,7 @@ function handle_tick(error, response, body) {
 module.exports = 
 { 
     getFile: getFile,
-    listFiles: listFiles ,
-    sendFile: sendFile
+    listFiles: listFiles,
+    sendFile: sendFile,
+    exeFile: exeFile
 }

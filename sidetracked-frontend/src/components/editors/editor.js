@@ -7,21 +7,36 @@ import {
 } from 'rebass'
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Comms from "../../../utils/communication"
+import Comms from "../../utils/communication"
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-markdown";
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-javascript"
 import "ace-builds/src-noconflict/theme-chrome";
-  
+
 
 class Markdown extends React.Component {
     constructor(props) {
         super(props)
-        console.log("MARKDOWN STARTING")
-        this.timerID = 0 ;
+        console.log("EDITOR STARTING")
+        this.timerID = 0
+        var type = props.location.file_name.substr(props.location.file_name.lastIndexOf("."))
+        switch(type) {
+            case ".py":
+                type = "python"
+                break;
+            case ".md":
+                type = "markdown"
+                break;
+            default:
+                type = "text"
+        }
+        console.log(type)
         this.state = {
             code: "# UNABLE TO LOAD RIP",
-            file_name: props.location.file_name
+            file_name: props.location.file_name,
+            file_type: type
         }
         
     }
@@ -53,18 +68,33 @@ class Markdown extends React.Component {
         })
     }
 
+    runFile() {
+        Comms.exeFile("python", this.state.file_name, (body) => {
+            var res_json = JSON.parse(body);
+            // let decoded_file = atob(res_json.data)
+            console.log(res_json)
+            // if(decoded_file != this.state.code) {
+            //     this.setState({ 
+            //         code: decoded_file
+            //     })
+            // }
+        })
+    }
+
     // https://github.com/securingsincity/react-ace/blob/90255338bdb4312db6a2caf81decfb153b401a1e/docs/Ace.md
     render() {
         return (
             <div style={{  height: "100vh", width: "100vw", backgroundColor:"#1e2227" }}>
                 <Navbar bg="primary" variant="dark" style={{  height: "5vh" }}>
                     <Navbar.Brand onClick={() => this.props.history.push({pathname: "/"})}>TEAM0001</Navbar.Brand>
-                        <Nav className="mr-auto" />
+                    <Nav className="mr-auto">
+                    <Nav.Link onClick={() => this.runFile()}>Run</Nav.Link>
+                    </Nav>
                 </Navbar>
-                {/* <SideTracksCodeMirror name="formula" onChange={this.updateCode} value={this.state.code} /> */}
+
                 <AceEditor
                     placeholder="Start Editing"
-                    mode="markdown"
+                    mode={this.state.file_type}
                     theme="chrome"
                     name="blah2"
                     height="95vh"

@@ -50,7 +50,7 @@ class NotesPage extends React.Component {
             } else {
                 let file_name_file = this.state.curr_file_list[i].file
                 ret.push(
-                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.props.history.push({pathname: "/editors/markdown", file_name: this.state.curr_dir_name + file_name_file})} backgroundColor="#007bff">
+                    <Button width={"200px"} height={"200px"} mx={"20px"} my={"10px"} onClick={() => this.props.history.push({pathname: "/editor", file_name: this.state.curr_dir_name + file_name_file})} backgroundColor="#007bff">
                         <Text
                             fontSize={ "40px" }
                             fontWeight='bold'
@@ -74,9 +74,15 @@ class NotesPage extends React.Component {
         }
     }
 
+    handleClick(e) {
+        if (e.type === 'contextmenu') {
+            console.log('Right click');
+        }
+    }
+
     render() {
         return (
-            <div style={{  height: "100vh", width: "100%", backgroundColor:"#2C2F33"}}>
+            <div onContextMenu={this.handleClick} style={{  height: "100vh", width: "100%", backgroundColor:"#2C2F33"}}>
                 <Navbar bg="primary" variant="dark" style={{  height: "5vh" }}>
                     <Navbar.Brand onClick={() => this.props.history.push({pathname: "/"})}>TEAM0001</Navbar.Brand>
                     <Nav className="mr-auto">

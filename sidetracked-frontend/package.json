@@ -15,6 +15,7 @@
     "react-bootstrap": "^1.4.0",
     "react-codemirror": "^1.0.0",
     "react-codemirror2": "^7.2.1",
+    "react-data-menu": "^1.1.2",
     "react-highlight.js": "^1.0.7",
     "react-markdown": "^5.0.2",
     "react-mde": "^11.0.0",
