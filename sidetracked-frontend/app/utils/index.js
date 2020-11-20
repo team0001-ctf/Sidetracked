@@ -16,21 +16,25 @@ function Request(
   request_method = 'POST',
 ) {
   console.log(callback, request_url, request_data, request_headers, request_method);
-  callback(false, { statusCode: 200 }, DATA[request_url]);
-  return;
+  // callback(false, { statusCode: 200 }, DATA[request_url]);
+  // return;
 
   request({
-    body: request_data,
+    body: JSON.stringify(request_data),
     followAllRedirects: true,
-    headers: Object.assign({
+    headers: JSON.stringify(Object.assign({
     }, {
       'Content-Type': 'application/json',
       'Host': request_url,
       'X-Requested-With': 'XMLHttpRequest'
-    }, request_headers),
+    }, request_headers)),
     method: request_method,
     url: request_url
-  }, callback);
+  }, (error, res, body) => {
+    console.log(body, res);
+    callback && callback(error, res, body);
+    res && res.end();
+  });
 }
 
 function tick(json_data = null) {

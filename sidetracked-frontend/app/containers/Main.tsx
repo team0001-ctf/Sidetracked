@@ -24,7 +24,7 @@ export default function(Comp) {
 
   return function(props) {
     return (
-      <div className="container">
+      <div className="container" style={{ height: "100vh", width: "100%", backgroundColor:"#2C2F33" }}>
         <Navbar className="navbar" bg="primary" variant="dark">
           <Navbar.Brand onClick={home}>TEAM0001</Navbar.Brand>
           <Nav className="mr-auto">

@@ -37,6 +37,7 @@ export default Main(class extends React.Component {
           ].map((plugin, idx) => {
             return (
               <Button
+                key={idx}
                 width={"150px"}
                 height={"150px"}
                 mx={"30px"}

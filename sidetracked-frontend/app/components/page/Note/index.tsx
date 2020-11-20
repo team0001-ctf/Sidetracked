@@ -51,6 +51,12 @@ export default Main(class extends React.Component {
         }
     }
 
+    handleClick(e) {
+        if (e.type === 'contextmenu') {
+            console.log('Right click');
+        }
+    }
+
     render() {
       return (
         <>
@@ -70,7 +76,7 @@ export default Main(class extends React.Component {
                 ..
               </Text>
           </Button>
-          {this.state.curr_file_list.map((item, key) => {
+          {this.state.curr_file_list && this.state.curr_file_list.map((item, key) => {
             let file_name = item.file;
             if (item.type == "folder") {
               return (
