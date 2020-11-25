@@ -3,11 +3,11 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 
 
+from api import exe
 from api import hearbeat
 from api import list_files
 from api import upload_files
 from api import download_files
-from api import exe
 
 app = Flask(__name__)
 api = Api(app)
@@ -48,13 +48,14 @@ class api_ls(Resource):
 
 class api_heartbeat(Resource):
     def get(self):
-        response = hearbeat(request.get_json)
-        return request.get_json(), response
+        data, response = hearbeat(request.get_json)
+        return data, response
 
 class api_exe(Resource):
     def get(self):
         response = exe(request.headers)
         return response
+
 
 api.add_resource(index, '/')
 api.add_resource(auth, '/auth')

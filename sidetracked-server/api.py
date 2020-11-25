@@ -1,11 +1,11 @@
+# python
+import os
+import base64
 from flask import jsonify, json
+from binaryornot.check import is_binary
+
+# local
 from sidetrack_logger import logger as log
-import os
-import base64
-import os
-import base64
-
-
 
 # import base64 # uncomment if we want to compress our data
 # import zlib # uncomment if we want to compress our data
@@ -129,10 +129,19 @@ def download_files(header_data):
 # HEADER: { dir_name: "/" }
 def list_files(header_data):
     print("GOT HERE")
-    # @NOTE this is probably still vulnerable to path traversal and should be implemented properly
-    path = header_data['dir_name']
+
+    try: # pls send the dirname
+        path = header_data['dir_name']
+    except:
+        # not sure if here we should error to the client or just leave with this
+        log(level='warning', msg='[function: list-dirs] client did not specify a dir_name, defaulting to root')
+        path = '/'
+
+
     # Set up the full path of where to `ls`
     path = f'root{path}'
+
+    # @NOTE this is probably still vulnerable to path traversal and should be implemented properly
     # Client should never .. , so lets just remove it
     path = path.replace('/..','')
 
@@ -168,8 +177,69 @@ def list_files(header_data):
 
 
 def hearbeat(json_data):
-    # do the things needed
-    return 200
+    # sample data sent
+    # the client sends it username, (will be verified in auth) and each line they have edited
+    ## [for now just add something random for username]
+    #{
+    #    "username": 'username',
+    #    "file": 'path/to/edited/file',
+    #    "delta" [
+    #        {
+    #            "line_num": <num>,
+    #            "text": 'something'
+    #        },
+    #        {
+    #            "line_num": <num>,
+    #            "text": 'something'
+    #        }
+    #        ]
+    #}
+    #
+    #
+    # sample data returned
+    # the server sends back a list of changes in the file that is being edited, along with the things that the users have changed
+    #{
+    #    "delta" [
+    #        {
+    #            "username": 'username',
+    #            "line_num": <num>,
+    #            "text": 'something'
+    #        },
+    #        {
+    #            "username": 'username',
+    #            "line_num": <num>,
+    #            "text": 'something'
+    #        }
+    #        ]
+    #}
+
+    delta = json_data['delta'] # perhaps this needs more info, could be an object, or we could add more json idk
+    username = json_data['username'] # we need this to display who is editing
+    filename = json_data['file']
+
+    if not os.path.exists(filename):
+        # error checks
+        return "path requested in heartbeat does not exist", 400
+
+    elif not os.path.isfile(filename):
+        # error checks
+        return "path requested is a directory, not a file", 400
+
+    elif is_binary(filename):
+        # add code for hex editor
+        return "cannot edit binary file ..yet", 400
+
+    else:
+        # add code to edit for text
+        return "OK", 200
+
+
+    # ill deal with these later
+    print('delta: ',delta)
+    print('username: ',username)
+    print('filename: ',filename)
+
+    return "OK", 200
 
 def exe(header_data):
     import subprocess

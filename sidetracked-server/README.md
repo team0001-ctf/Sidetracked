@@ -23,3 +23,7 @@ send changed delta of the file
 - get what other ppl have changed
 
 
+
+
+# auth
+need to add a second database, probably sqlite for the authentication
