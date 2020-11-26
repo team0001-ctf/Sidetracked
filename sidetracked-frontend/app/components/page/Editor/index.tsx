@@ -22,31 +22,35 @@ export default class extends React.Component {
     constructor(props) {
         super(props)
         console.log("EDITOR STARTING")
-        this.timerID = 0
-        var type = props.location.file_name.substr(props.location.file_name.lastIndexOf("."))
-        switch(type) {
-            case ".py":
-                type = "python"
-                break;
-            case ".md":
-                type = "markdown"
-                break;
-            default:
-                type = "text"
-        }
-        console.log(type)
+        this.timerID = 0;
+      this.editorRef = React.createRef();
+        // this.cursorPosition = null;
         this.state = {
             code: "# UNABLE TO LOAD RIP",
             file_name: props.location.file_name,
-            file_type: type,
+            file_type: this.getType(props && props.location && props.location.file_name && props.location.file_name.substr(props.location.file_name.lastIndexOf("."))),
             exe_out: ""
         }
+    }
+
+    getType(_type) {
+      console.log(_type)
+      switch(_type) {
+        case ".py":
+          return "python"
+          break;
+        case ".md":
+          return "markdown"
+          break;
+        default:
+          return "text"
+      }
     }
 
     componentDidMount() {
         console.log("componentWillMount")
         this.downloadfile()
-        this.startTicks()
+        // this.startTicks()
     }
 
     componentWillUnmount() {
@@ -59,14 +63,20 @@ export default class extends React.Component {
 
     downloadfile() {
         API.getFile(this.state.file_name, (body) => {
-            var res_json = JSON.parse(JSON.stringify(body));
-            let decoded_file = atob(res_json.data)
-            console.log(decoded_file)
-            if(decoded_file != this.state.code) {
-                this.setState({ 
-                    code: decoded_file
-                })
+          // console.log(body);
+            try {
+              var res_json = JSON.parse(body);
+              // console.log(res_json, typeof res_json);
+
+              let decoded_file = atob(res_json.data)
+              // console.log(decoded_file)
+              if(decoded_file != this.state.code) {
+                  this.setState({
+                      code: decoded_file
+                  })
+              }
             }
+            catch (error) {}
         })
     }
 
@@ -125,6 +135,7 @@ export default class extends React.Component {
               </Navbar>
 
               <AceEditor
+                  ref={this.editorRef}
                   placeholder="Start Editing"
                   mode={this.state.file_type}
                   theme="chrome"
@@ -132,8 +143,14 @@ export default class extends React.Component {
                   height={first_ace_size}
                   width="100%"
                   // onLoad={this.onLoad}
-                  onChange={(newCode) => {
-                      let obj_to_send = { "file": this.state.file_name, "data": btoa(newCode) }
+                  // onCursorChange={(selection) => {
+                  //   this.cursorPosition = selection.getCursor();
+                  // }}
+                  onChange={(value, evt) => {
+                    // console.log(this.editorRef);
+                    // console.log(this.cursorPosition);
+                    console.log(value, evt);
+                      let obj_to_send = { "file": this.state.file_name, "data": btoa(value) }
                       API.sendFile(obj_to_send);
                   }}
                   fontSize={20}
