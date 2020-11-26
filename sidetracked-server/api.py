@@ -5,6 +5,7 @@ from flask import jsonify, json
 from binaryornot.check import is_binary
 
 # local
+import helper
 from sidetrack_logger import logger as log
 
 # import base64 # uncomment if we want to compress our data
@@ -25,7 +26,7 @@ def upload_files(json_data):
         filepath = json_data['file']
         data = json_data['data']
         data = base64.b64decode(data)
-        filepath = f'root{filepath}'.replace('..', '')
+        filepath = f'root/{filepath}'.replace('..', '') # haveing a // in a path does not effect it, but not having a / allows you to write in the directory of the server --> pls dont remove the / form root/
     except:
         # on fail return that along side with a client erorr response
         log(level='error', msg=f"malformed request sent from client")
@@ -56,7 +57,7 @@ def upload_files(json_data):
 def download_files(header_data):
     try:
         # attempt to get requested file from client
-        filepath = 'root'+header_data['file']
+        filepath = 'root/'+header_data['file']# haveing a // in a path does not effect it, but not having a / allows you to write in the directory of the server --> pls dont remove the / form root/
     except:
         # malformed request
         log(level='error', msg=f"malformed request sent from client")
@@ -139,13 +140,13 @@ def list_files(header_data):
 
 
     # Set up the full path of where to `ls`
-    path = f'root{path}'
+    path = f'root/{path}'# haveing a // in a path does not effect it, but not having a / allows you to write in the directory of the server --> pls dont remove the / form root/
 
     # @NOTE this is probably still vulnerable to path traversal and should be implemented properly
     # Client should never .. , so lets just remove it
-    path = path.replace('/..','')
+    path = path.replace('..','')
 
-    log(level='log', msg=f'accessing fies root{header_data["dir_name"]}')
+    log(level='log', msg=f'accessing fies root/{path}')
 
     # Get the list of files in the dir
     files = os.listdir(path)
@@ -181,9 +182,9 @@ def hearbeat(json_data):
     # the client sends it username, (will be verified in auth) and each line they have edited
     ## [for now just add something random for username]
     #{
-    #    "username": 'username',
     #    "file": 'path/to/edited/file',
-    #    "delta" [
+    #    "time": 'time of last sent hearbeat package [epoch time format]', // this is needed because it will send back all changes to the file since this time
+    #    "delta" : [
     #        {
     #            "line_num": <num>,
     #            "text": 'something'
@@ -199,7 +200,7 @@ def hearbeat(json_data):
     # sample data returned
     # the server sends back a list of changes in the file that is being edited, along with the things that the users have changed
     #{
-    #    "delta" [
+    #    "delta" : [
     #        {
     #            "username": 'username',
     #            "line_num": <num>,
@@ -212,35 +213,37 @@ def hearbeat(json_data):
     #        }
     #        ]
     #}
-
     delta = json_data['delta'] # perhaps this needs more info, could be an object, or we could add more json idk
-    username = json_data['username'] # we need this to display who is editing
     filename = json_data['file']
+    filename = f'root/{filename}'
 
+    # error checking @NOTE: if we need more performance i guess we can remove it
+    if not type(delta) == list  and not type(filename) == str:
+        return "malformed datatypes, correct: delta == list, username == str, file == str", 400
+
+    # error checks
     if not os.path.exists(filename):
-        # error checks
         return "path requested in heartbeat does not exist", 400
 
+    # error checks
     elif not os.path.isfile(filename):
-        # error checks
         return "path requested is a directory, not a file", 400
 
+    # TODO add code for hex editor
     elif is_binary(filename):
-        # add code for hex editor
-        return "cannot edit binary file ..yet", 400
-
-    else:
-        # add code to edit for text
-        return "OK", 200
+        return "cannot edit binary file ..yet", 501
 
 
-    # ill deal with these later
-    print('delta: ',delta)
-    print('username: ',username)
-    print('filename: ',filename)
+    if not helper.write_changes(delta, filename):
+        return "error while editing text file", 500
 
-    return "OK", 200
+    changes = helper.read_changes(filename)
 
+    return changes, 200
+
+
+
+# NOTE: function is winner of our most insecure bit of code contest
 def exe(header_data):
     import subprocess
     process = subprocess.Popen("timeout 5 " + header_data["cmd"] + " root" + header_data["file"], stdout=subprocess.PIPE, shell=True)

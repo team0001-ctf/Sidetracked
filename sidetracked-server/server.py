@@ -47,8 +47,8 @@ class api_ls(Resource):
 
 
 class api_heartbeat(Resource):
-    def get(self):
-        data, response = hearbeat(request.get_json)
+    def post(self):
+        data, response = hearbeat(request.get_json())
         return data, response
 
 class api_exe(Resource):
@@ -61,7 +61,7 @@ api.add_resource(index, '/')
 api.add_resource(auth, '/auth')
 api.add_resource(api_ls, '/api/v0/ls/')
 api.add_resource(api_files, '/api/v0/file/')
-api.add_resource(api_heartbeat, '/api/v0/hearbeat/')
+api.add_resource(api_heartbeat, '/api/v0/heartbeat/')
 api.add_resource(api_exe, '/api/v0/exe/')
 
 
