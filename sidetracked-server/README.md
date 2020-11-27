@@ -27,3 +27,32 @@ send changed delta of the file
 
 # auth
 need to add a second database, probably sqlite for the authentication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# small reqwrite
+
+
+### things that will break
+when downloading files to the server the server responded with 
+```json
+{
+    "data": data
+}
+```
+i didnt see the point of this so i removed it, this can be bought back easy enough
+- its just commented out in api.py
+
