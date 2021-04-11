@@ -60,6 +60,16 @@ then
     fi
 
 
+elif [ "$1" == "pull" ]
+then
+
+    while [ 1 ]
+    do
+        git pull --force
+        sleep 60
+    done
+
+
 
 # get shell in container on ./run shell
 elif [ "$1" == "shell" ]
