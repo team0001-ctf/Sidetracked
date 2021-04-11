@@ -1,0 +1,45 @@
+[0m[91m[4m[ error ] 1606401402.1438065  ||  file roottestfile not found on the server
+[0m[91m[4m[ error ] 1606401476.7756066  ||  file roottestfile not found on the server
+[0m[91m[4m[ error ] 1606401485.4649239  ||  file roottestfile not found on the server
+[0m[91m[4m[ error ] 1606401533.5595825  ||  file roottestfile not found on the server
+[0m[91m[4m[ error ] 1606401553.0648143  ||  file roottestfile not found on the server
+[0m[91m[4m[ error ] 1606401568.7753215  ||  file roottestfile not found on the server
+[0m[91m[4m[ error ] 1606401620.0369987  ||  file root/testfile not found on the server
+[0m[1m[ log ] 1606401627.21889  ||  accessing fies root/root/
+[0m[91m[4m[ error ] 1606401636.8141136  ||  file root//test.py not found on the server
+[0m[91m[4m[ error ] 1606401648.9613118  ||  file root/test.py not found on the server
+[0m[1m[ log ] 1606401772.3433826  ||  file: roottestfile, written to server
+[0m[1m[ log ] 1606401783.0452073  ||  accessing fies root/root/
+[0m[1m[ log ] 1606401868.1927564  ||  file: root/testfile, written to server
+[0m[1m[ log ] 1606401873.3594825  ||  returning file:  root/testfile
+[0m[1m[ log ] 1606402131.0591266  ||  file: root/testfile, written to server
+[0m[1m[ log ] 1606402825.4649732  ||  file: root/testfile, written to server
+[0m[91m[4m[ error ] 1606405264.894331  ||  element {change} in delta list is invalid
+[0m[91m[4m[ error ] 1606405278.800637  ||  element {'line_num': 'bab', 'text': 'RGFtbiB0aGF0J3MgaW50ZXJlc3RpbmchIFJlYWxseSwgcmVhbGx5IGludGVyZXN0aW5nLiBMaWtlLCBpdCBoYXMgYSBsb3Qgb2YgaW50ZXJlc3Rpbmcgc3R1ZmYgaW4gaXQuIEV2ZW4gY2xvbmluZyBkaW5vc2F1cnMgb3IgdGltZSB0cmF2ZWwgd291bGQgYmUgbGVzcyBpbnRlcmVzdGluZy4gQmVjYXVzZSB0aGF0IHdhcyB0aGUgbW9zdCBpbnRlcmVzdGluZyB0aGluZyBpJ3ZlIGV2ZXIgaGVhcmQuIE1hbiwgaSByZWFsbHkgY2FuJ3QgYmVsaWV2ZSBob3cgaW50ZXJlc3RpbmcgaXQgaXMuIEJ1dC4uLiB0aGVyZSBpcyBvbmx5IG9uZSBwcm9ibGVtLCBqdXN0IG9uZSBsaXR0bGUsIHNtYWxsLCBtaWNyb3Njb3BpYyBwcm9ibGVtIHRoYXQgeW91IHByb2JhYmx5IGRpZG4ndCB0aGluayBhYm91dC4gQW5kIHRoYXQgaXMsIHRoZSBmYWN0IHRoYXQgbGl0ZXJhbGx5IG5vIGJvZHkgYXNrZWQgZm9yIHlvdSB0byBzYXkgdGhhdC4gSSBzZWFyY2hlZCB0aGUgZW50aXJldHkgb2YgRXVyb3BlLCBBbWVyaWNhLCBBc2lhIGFuZCBPY2VhbmlhLiBCdXQgc2FkbHksIG5vIG9uZSBoYXMgYXNrZWQu'} in delta list is invalid
+[0m[91m[4m[ error ] 1606405299.2900074  ||  element {'line_num': 'bab', 'text': 'RGFtbiB0aGF0J3MgaW50ZXJlc3RpbmchIFJlYWxseSwgcmVhbGx5IGludGVyZXN0aW5nLiBMaWtlLCBpdCBoYXMgYSBsb3Qgb2YgaW50ZXJlc3Rpbmcgc3R1ZmYgaW4gaXQuIEV2ZW4gY2xvbmluZyBkaW5vc2F1cnMgb3IgdGltZSB0cmF2ZWwgd291bGQgYmUgbGVzcyBpbnRlcmVzdGluZy4gQmVjYXVzZSB0aGF0IHdhcyB0aGUgbW9zdCBpbnRlcmVzdGluZyB0aGluZyBpJ3ZlIGV2ZXIgaGVhcmQuIE1hbiwgaSByZWFsbHkgY2FuJ3QgYmVsaWV2ZSBob3cgaW50ZXJlc3RpbmcgaXQgaXMuIEJ1dC4uLiB0aGVyZSBpcyBvbmx5IG9uZSBwcm9ibGVtLCBqdXN0IG9uZSBsaXR0bGUsIHNtYWxsLCBtaWNyb3Njb3BpYyBwcm9ibGVtIHRoYXQgeW91IHByb2JhYmx5IGRpZG4ndCB0aGluayBhYm91dC4gQW5kIHRoYXQgaXMsIHRoZSBmYWN0IHRoYXQgbGl0ZXJhbGx5IG5vIGJvZHkgYXNrZWQgZm9yIHlvdSB0byBzYXkgdGhhdC4gSSBzZWFyY2hlZCB0aGUgZW50aXJldHkgb2YgRXVyb3BlLCBBbWVyaWNhLCBBc2lhIGFuZCBPY2VhbmlhLiBCdXQgc2FkbHksIG5vIG9uZSBoYXMgYXNrZWQu'} in delta list is invalid
+[0m[91m[4m[ error ] 1606405344.133039  ||  element {'line_num': 'bab', 'text': 'RGFtbiB0aGF0J3MgaW50ZXJlc3RpbmchIFJlYWxseSwgcmVhbGx5IGludGVyZXN0aW5nLiBMaWtlLCBpdCBoYXMgYSBsb3Qgb2YgaW50ZXJlc3Rpbmcgc3R1ZmYgaW4gaXQuIEV2ZW4gY2xvbmluZyBkaW5vc2F1cnMgb3IgdGltZSB0cmF2ZWwgd291bGQgYmUgbGVzcyBpbnRlcmVzdGluZy4gQmVjYXVzZSB0aGF0IHdhcyB0aGUgbW9zdCBpbnRlcmVzdGluZyB0aGluZyBpJ3ZlIGV2ZXIgaGVhcmQuIE1hbiwgaSByZWFsbHkgY2FuJ3QgYmVsaWV2ZSBob3cgaW50ZXJlc3RpbmcgaXQgaXMuIEJ1dC4uLiB0aGVyZSBpcyBvbmx5IG9uZSBwcm9ibGVtLCBqdXN0IG9uZSBsaXR0bGUsIHNtYWxsLCBtaWNyb3Njb3BpYyBwcm9ibGVtIHRoYXQgeW91IHByb2JhYmx5IGRpZG4ndCB0aGluayBhYm91dC4gQW5kIHRoYXQgaXMsIHRoZSBmYWN0IHRoYXQgbGl0ZXJhbGx5IG5vIGJvZHkgYXNrZWQgZm9yIHlvdSB0byBzYXkgdGhhdC4gSSBzZWFyY2hlZCB0aGUgZW50aXJldHkgb2YgRXVyb3BlLCBBbWVyaWNhLCBBc2lhIGFuZCBPY2VhbmlhLiBCdXQgc2FkbHksIG5vIG9uZSBoYXMgYXNrZWQu'} in delta list is invalid
+[0m[91m[4m[ error ] 1606405346.918628  ||  element {'line_num': 27, 'text': 'fuck you'} in delta list is invalid
+[0m[91m[4m[ error ] 1606405403.3526652  ||  element {'line_num': 27, 'text': 'fuck you'} in delta list is invalid, make sure line_num is int AND changed_line is encoded
+[0m[93m[ warning ] 1606405468.5858417  ||  element {'line_num': 27, 'text': 'fuck you'} in delta list is invalid and WILL BE IGNORED 
+, make sure line_num is int AND changed_line is encoded
+[0m[93m[ warning ] 1606405479.0754907  ||  element {'line_num': 27, 'text': 'fuck you'} in delta list is invalid and WILL BE IGNORED 
+make sure line_num is int AND changed_line is encoded
+[0m[93m[ warning ] 1606405504.9536822  ||  element {'line_num': 27, 'text': 'fuck you'} in delta list is invalid and WILL BE IGNORED 
+make sure line_num is int AND changed_line is encoded
+[0m[93m[ warning ] 1606405590.3290913  ||  element {'text': 'RGFtbiB0aGF0J3MgaW50ZXJlc3RpbmchIFJlYWxseSwgcmVhbGx5IGludGVyZXN0aW5nLiBMaWtlLCBpdCBoYXMgYSBsb3Qgb2YgaW50ZXJlc3Rpbmcgc3R1ZmYgaW4gaXQuIEV2ZW4gY2xvbmluZyBkaW5vc2F1cnMgb3IgdGltZSB0cmF2ZWwgd291bGQgYmUgbGVzcyBpbnRlcmVzdGluZy4gQmVjYXVzZSB0aGF0IHdhcyB0aGUgbW9zdCBpbnRlcmVzdGluZyB0aGluZyBpJ3ZlIGV2ZXIgaGVhcmQuIE1hbiwgaSByZWFsbHkgY2FuJ3QgYmVsaWV2ZSBob3cgaW50ZXJlc3RpbmcgaXQgaXMuIEJ1dC4uLiB0aGVyZSBpcyBvbmx5IG9uZSBwcm9ibGVtLCBqdXN0IG9uZSBsaXR0bGUsIHNtYWxsLCBtaWNyb3Njb3BpYyBwcm9ibGVtIHRoYXQgeW91IHByb2JhYmx5IGRpZG4ndCB0aGluayBhYm91dC4gQW5kIHRoYXQgaXMsIHRoZSBmYWN0IHRoYXQgbGl0ZXJhbGx5IG5vIGJvZHkgYXNrZWQgZm9yIHlvdSB0byBzYXkgdGhhdC4gSSBzZWFyY2hlZCB0aGUgZW50aXJldHkgb2YgRXVyb3BlLCBBbWVyaWNhLCBBc2lhIGFuZCBPY2VhbmlhLiBCdXQgc2FkbHksIG5vIG9uZSBoYXMgYXNrZWQu'} in delta list is invalid and WILL BE IGNORED 
+make sure line_num is int AND changed_line is encoded
+[0m[93m[ warning ] 1606405623.3545983  ||  element {'text': 'RGFtbiB0aGF0J3MgaW50ZXJlc3RpbmchIFJlYWxseSwgcmVhbGx5IGludGVyZXN0aW5nLiBMaWtlLCBpdCBoYXMgYSBsb3Qgb2YgaW50ZXJlc3Rpbmcgc3R1ZmYgaW4gaXQuIEV2ZW4gY2xvbmluZyBkaW5vc2F1cnMgb3IgdGltZSB0cmF2ZWwgd291bGQgYmUgbGVzcyBpbnRlcmVzdGluZy4gQmVjYXVzZSB0aGF0IHdhcyB0aGUgbW9zdCBpbnRlcmVzdGluZyB0aGluZyBpJ3ZlIGV2ZXIgaGVhcmQuIE1hbiwgaSByZWFsbHkgY2FuJ3QgYmVsaWV2ZSBob3cgaW50ZXJlc3RpbmcgaXQgaXMuIEJ1dC4uLiB0aGVyZSBpcyBvbmx5IG9uZSBwcm9ibGVtLCBqdXN0IG9uZSBsaXR0bGUsIHNtYWxsLCBtaWNyb3Njb3BpYyBwcm9ibGVtIHRoYXQgeW91IHByb2JhYmx5IGRpZG4ndCB0aGluayBhYm91dC4gQW5kIHRoYXQgaXMsIHRoZSBmYWN0IHRoYXQgbGl0ZXJhbGx5IG5vIGJvZHkgYXNrZWQgZm9yIHlvdSB0byBzYXkgdGhhdC4gSSBzZWFyY2hlZCB0aGUgZW50aXJldHkgb2YgRXVyb3BlLCBBbWVyaWNhLCBBc2lhIGFuZCBPY2VhbmlhLiBCdXQgc2FkbHksIG5vIG9uZSBoYXMgYXNrZWQu'} in delta list is invalid and WILL BE IGNORED! 
+make sure line_num is int AND changed_line is encoded
+[0m[1m[ log ] 1606430337.8178155  ||  file: root/testfile, written to server
+[0m[1m[ log ] 1606430346.4013627  ||  accessing fies root/root/
+[0m[1m[ log ] 1606430985.1903555  ||  reading file:  root/testfile
+[0m[91m[4m[ error ] 1606430993.0778623  ||  file root/fuckface not found on the server
+[0m[1m[ log ] 1606434140.1839936  ||  reading file:  root/testfile
+[0m[1m[ log ] 1606434143.345737  ||  accessing fies root/root/
+[0m[1m[ log ] 1606434149.8857622  ||  accessing fies root/root/notes
+[0m[1m[ log ] 1606434161.0532196  ||  writing file: {filepath} to server
+[0m[1m[ log ] 1606434216.0824006  ||  writing file: {filepath} to server
+[0m[1m[ log ] 1606434518.4662707  ||  reading file:  root/testfile
+[0m[1m[ log ] 1606435301.1474333  ||  writing file: {filepath} to server
+[0m[1m[ log ] 1606435307.8705277  ||  reading file:  root/testfile
+[0m[1m[ log ] 1606435318.5645795  ||  accessing fies root/root/
