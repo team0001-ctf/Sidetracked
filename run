@@ -13,6 +13,7 @@ then
         git pull --force
         sleep 60
     done
+fi
 
 
 
