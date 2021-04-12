@@ -1,4 +1,6 @@
 #Node-Explorer{
+  display: flex;
+  flex-flow: column;
   border:1px solid black;
   height:100%;
   width:29%;
@@ -14,4 +16,10 @@
 .header{
   font-size: 18px;
   padding: 8px;
+}
+
+#Nodes{
+  overflow:auto;
+  height: 100%;
+  padding:0 50px;
 }
