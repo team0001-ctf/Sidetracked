@@ -16,7 +16,7 @@ from flask import make_response
 from flask_restful import Api
 from flask_restful import Resource
 
-app = Flask(__name__, static_folder='build', static_url_path='/')
+app = Flask(__name__, static_folder='client/build/', static_url_path='/')
 api = Api(app)
 
 

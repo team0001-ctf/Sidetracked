@@ -36,7 +36,7 @@ RUN pip3 install requests
 RUN apt install npm -y
 RUN apt install nodejs -y
 RUN npm install react-scripts -g
-RUN cd client; npm run build
+# RUN cd client; npm run build
 
 # setup stuff for prod environment
 EXPOSE 5000
