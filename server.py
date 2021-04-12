@@ -15,6 +15,7 @@ from flask import make_response
 
 from flask_restful import Api
 from flask_restful import Resource
+from flask_restful import reqparse
 
 app = Flask(__name__, static_folder='client/build/', static_url_path='/')
 api = Api(app)
@@ -24,7 +25,7 @@ def md5sum(path):
     return hashlib.md5(open(path,'rb').read()).hexdigest()
 
 def sanitize_filename(a: str):
-    allowed = string.ascii_letters + string.digits + '_.-'
+    allowed = string.ascii_letters + string.digits + '_.-/'
     a = a.replace('..', '_')
 
     filename = ''
@@ -136,6 +137,21 @@ class files(Resource):
 
         return {'path': '/file/path'}
 
+class get_children(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("node")
+        args = parser.parse_args()
+
+        node = args.get('node')
+        node_path = sanitize_filename(node)
+        print('files/'+node_path)
+        _,directories,files = next(os.walk('files/'+node_path))
+        return {
+                "node": node,
+                "dir_children": directories,
+                "files_children": files
+                }
 
 class ls(Resource):
     def get(self):
@@ -180,6 +196,7 @@ api.add_resource(get_hash, '/api/hash/<path>')
 api.add_resource(update, '/api/update/<path>')
 api.add_resource(files, '/api/file/<path>')
 api.add_resource(ls, '/api/ls')
+api.add_resource(get_children,'/api/get_children/')
 
 api.add_resource(render, '/render/<path>')
 
