@@ -1,4 +1,6 @@
 #Node-Explorer{
+  display: flex;
+  flex-flow: column;
   border:1px solid black;
   height:100%;
   width:29%;
@@ -14,4 +16,26 @@
 .header{
   font-size: 18px;
   padding: 8px;
+}
+
+#Nodes{
+  overflow:auto;
+  height: 100%;
+  padding:0 50px;
+}
+
+#Node-Options>div>img{
+  height:12px;
+  padding:0 5px;
+}
+
+#Node-Options{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row;
+}
+
+#Child-Node{
+  width:100%;
+  margin:0 0 0 30px;
 }

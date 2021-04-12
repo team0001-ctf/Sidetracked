@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from "react"
-
 import {Editor, EditorState, RichUtils } from "draft-js"
+import { stateToMarkdown } from "draft-js-export-markdown";
 import BlockStyleControls from './StyleControls/BlockStyleControls.js'
 import InlineStyleControls from './StyleControls/InlineStyleControls.js'
 
-import { stateToMarkdown } from "draft-js-export-markdown";
 
 import './TextArea.css'
 
