@@ -28,7 +28,7 @@ api = Api(app)
 
 class index(Resource):
     def get(self):
-        return redirect('/index.html')
+        return app.send_static_file('index.html')
 
 
 
