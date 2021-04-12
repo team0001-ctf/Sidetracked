@@ -32,6 +32,11 @@ RUN pip3 install uuid
 RUN pip3 install bcrypt
 RUN pip3 install requests
 
+# install things for frontend
+RUN apt install npm
+RUN apt install nodejs
+RUN npm install react-scripts -g
+RUN cd client; npm run build
 
 # setup stuff for prod environment
 EXPOSE 5000
