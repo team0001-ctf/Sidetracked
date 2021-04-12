@@ -1,0 +1,17 @@
+#Node-Explorer{
+  border:1px solid black;
+  height:100%;
+  width:29%;
+}
+
+.Heading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height: 40px;
+}
+
+.header{
+  font-size: 18px;
+  padding: 8px;
+}

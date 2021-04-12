@@ -1,0 +1,50 @@
+#TextArea{
+  position:relative;
+  border: 1px solid #000;
+  max-height:100%;
+  height:100%;
+  width:70%;
+  float:right;
+}
+#TextArea-Container{
+  height:100%;
+  display:flex;
+  flex-flow:column;
+}
+#save {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 5%;
+}
+.Controls-Container{
+  display: flex;
+  height: 40px;
+  flex-direction: column;
+  align-items: center;
+}
+#Controls-Container-Inner{
+  padding:8px;
+}
+.StyleButton-Active{
+  font-weight: bold;
+}
+.StyleButton {
+  font-size: 100%;
+  background-color: white;
+  border: 0;
+  border-right: 1px solid black;
+  margin: 0 -1px;
+  border-left: 1px solid black;
+}
+div.DraftEditor-root {
+  padding: 10px 15px;
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  text-align:left;
+}
+div.DraftEditor-editorContainer,
+div.public-DraftEditor-content {
+  height: 100%;
+}
