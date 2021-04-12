@@ -15,8 +15,9 @@ from flask import make_response
 
 from flask_restful import Api
 from flask_restful import Resource
+from flask_restful import reqparse
 
-app = Flask(__name__, static_folder='build', static_url_path='/')
+app = Flask(__name__, static_folder='client/build/', static_url_path='/')
 api = Api(app)
 
 
@@ -24,7 +25,7 @@ def md5sum(path):
     return hashlib.md5(open(path,'rb').read()).hexdigest()
 
 def sanitize_filename(a: str):
-    allowed = string.ascii_letters + string.digits + '_.-'
+    allowed = string.ascii_letters + string.digits + '_.-/'
     a = a.replace('..', '_')
 
     filename = ''
@@ -116,16 +117,32 @@ class get_hash(Resource):
 
 
 class files(Resource):
-    def get(self, path):
+    def get(self):
         # any files in the static folder can be freely returned
         # this can be used for images and stuff
-        return send_file("files/"+sanitize_filename(path))
+        parser = reqparse.RequestParser()
+        parser.add_argument("file")
+        args = parser.parse_args()
+        file_path = args.get("file")
+        
+        try:
+            with open('files/'+file_path,'rb') as file:
+                encoded_file = base64.b64encode(file.read()).decode()
+        except:
+            return "No such file",400
 
-    def post(self, path):
+        return {
+            "encoded_file": encoded_file
+        }
+        
+        #return send_file("files/"+sanitize_filename(file_path))
+
+    def post(self):
         if not request.get_json(): return "no data sent", 400
-        if not path: return "filename was not part of the path", 400
+        if not request.get_json().get('path'): return "path is missing", 400
 
-        # get filedata
+        # get path,filedata
+        path = request.get_json().get('path')
         filedata = base64.b64decode(request.get_json().get('data').encode('utf-8'))
 
         # sanitize
@@ -135,6 +152,36 @@ class files(Resource):
             outfile.write(filedata)
 
         return {'path': '/file/path'}
+
+class folder(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument("node")
+        args = parser.parse_args()
+        node = args.get("node")
+        node_path = sanitize_filename(node)
+        _,directories,files = next(os.walk('files/'+node_path))
+        return {
+                "node": node,
+                "dir_children": directories,
+                "files_children": files
+        }
+
+    def post(self):
+        if not request.get_json(): return "no data sent", 400
+        if not request.get_json().get('path'): return "path is missing", 400
+
+        path = request.get_json().get('path')
+
+        sanitized_path = sanitize_filename(path)
+
+        print(sanitized_path)
+        try:
+            os.mkdir('files/'+sanitized_path)
+        except:
+            return "Wrong path", 400
+        
+        return {"success": True}
 
 
 class ls(Resource):
@@ -178,10 +225,13 @@ class update(Resource):
 
 api.add_resource(get_hash, '/api/hash/<path>')
 api.add_resource(update, '/api/update/<path>')
-api.add_resource(files, '/api/file/<path>')
+api.add_resource(files, '/api/file/')
 api.add_resource(ls, '/api/ls')
-
+api.add_resource(folder,'/api/folder/')
 api.add_resource(render, '/render/<path>')
+
+
+
 
 
 
