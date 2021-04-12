@@ -1,7 +1,7 @@
 import React from 'react'
 import './NodeExplorer.css'
 
-import NodeHandler from './NodeHandler.js'
+import NodeContainer from './NodeContainer.js'
 
 const NodeExplorer = () => {
   return (
@@ -11,7 +11,7 @@ const NodeExplorer = () => {
         <div className="Vertical-Divider"></div>
       </div>
       <div id="Nodes">
-        <NodeHandler needed={true}/>
+        <NodeContainer needed={true}/>
       </div>
     </div>
   );

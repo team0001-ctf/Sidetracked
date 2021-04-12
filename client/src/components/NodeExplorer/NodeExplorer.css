@@ -23,3 +23,19 @@
   height: 100%;
   padding:0 50px;
 }
+
+#Node-Options>div>img{
+  height:12px;
+  padding:0 5px;
+}
+
+#Node-Options{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row;
+}
+
+#Child-Node{
+  width:100%;
+  margin:0 0 0 30px;
+}
