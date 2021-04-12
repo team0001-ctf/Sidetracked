@@ -10,6 +10,7 @@ then
 
     while [ 1 ]
     do
+        git stash
         git pull --force
         sleep 60
     done
