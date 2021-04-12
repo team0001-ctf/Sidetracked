@@ -49,7 +49,7 @@ class files(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument("file")
         args = parser.parse_args()
-        file_path = args.get("file")
+        file_path = helpers.sanitize_filename(args.get("file"))
         
         try:
             with open('files/'+file_path,'rb') as file:
@@ -78,6 +78,7 @@ class files(Resource):
             outfile.write(filedata)
 
         return {'path': '/file/path'}
+
 
 class folder(Resource):
     def get(self):
