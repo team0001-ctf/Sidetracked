@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-#Overlay-Container{
+.Overlay-Container{
   display:flex;
   width: 50%;
   padding: 3px;
@@ -23,6 +23,29 @@
               0 0 0 6px black;
 }
 
+#Delete{
+  position:relative;
+  height:35%;
+  width:25%;
+  align-items:center;
+  flex-direction:column;
+}
+
+#Delete-Options{
+  position:absolute;
+  bottom:0;
+  padding:15px 0;
+}
+
+#Delete-Options>span{
+  padding:2px 21px;
+  margin: 0 3px;
+}
+#Delete-Options>span:hover{
+  border:1px solid black;
+  border-radius:10px;
+}
+
 #Overlay-Content{
   border:0;
   width:100%;
@@ -31,6 +54,6 @@
 #Overlay-Content:focus{
     outline-width: 0;
 }
-#Overlay-Container>img{
+#Overlay-Container>input[type=image]{
   padding:8px;
 }

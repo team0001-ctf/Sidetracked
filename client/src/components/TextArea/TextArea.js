@@ -1,5 +1,8 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import {Editor, EditorState, RichUtils } from "draft-js"
+import axios from 'axios'
+
+import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { stateToMarkdown } from "draft-js-export-markdown";
 import BlockStyleControls from './StyleControls/BlockStyleControls.js'
 import InlineStyleControls from './StyleControls/InlineStyleControls.js'
@@ -7,7 +10,7 @@ import InlineStyleControls from './StyleControls/InlineStyleControls.js'
 
 import './TextArea.css'
 
-const TextArea = () => {
+const TextArea = ({currentFile,setCurrentFile}) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   
   const handleKeyCommand = useCallback((command, editorState) => {
@@ -18,6 +21,17 @@ const TextArea = () => {
     }
     return "not-handled"
   })
+
+  useEffect(()=>{
+    if(currentFile){
+      axios.get(`/api/file/?file=${currentFile}`)
+        .then((res)=>{
+          let file = res.data.encoded_file
+          let contentState = stateFromMarkdown(atob(file));
+          setEditorState(EditorState.createWithContent(contentState))
+        })
+    }
+  },[currentFile])
 
   const _save = () =>{
     console.log(stateToMarkdown(editorState.getCurrentContent())

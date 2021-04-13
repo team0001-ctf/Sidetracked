@@ -3,7 +3,7 @@ import './NodeExplorer.css'
 
 import NodeContainer from './NodeContainer.js'
 
-const NodeExplorer = () => {
+const NodeExplorer = ({currentFile,setCurrentFile}) => {
   return (
     <div id="Node-Explorer">
       <div className='Heading'>
@@ -11,7 +11,12 @@ const NodeExplorer = () => {
         <div className="Vertical-Divider"></div>
       </div>
       <div id="Nodes">
-        <NodeContainer needed={true}/>
+        <NodeContainer 
+          name="Root"
+          path='/'
+          currentFile={currentFile}
+          setCurrentFile={setCurrentFile}
+        />
       </div>
     </div>
   );
