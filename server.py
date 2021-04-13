@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # python imports
 import os
+import shutil
 import sys
 import time
 import base64
@@ -15,7 +16,6 @@ from flask import make_response
 from flask_restful import Api
 from flask_restful import Resource
 from flask_restful import reqparse
-
 # local imports
 import helpers
 
@@ -46,10 +46,8 @@ class files(Resource):
     def get(self):
         # any files in the static folder can be freely returned
         # this can be used for images and stuff
-        parser = reqparse.RequestParser()
-        parser.add_argument("file")
-        args = parser.parse_args()
-        file_path = helpers.sanitize_filename(args.get("file"))
+        file = helpers.parse_get("file")
+        file_path = helpers.sanitize_filename(file)
         
         try:
             with open('files/'+file_path,'rb') as file:
@@ -78,14 +76,22 @@ class files(Resource):
             outfile.write(filedata)
 
         return {'path': '/file/path'}
+    
+    def delete(self):
+        file = helpers.parse_get("file")
+        file_path = helpers.sanitize_filename(file)
+
+        try:
+            os.remove('files/'+file_path)
+        except:
+            return "Error of some sort", 400
+        
+        return helpers.SUCCESS
 
 
 class folder(Resource):
     def get(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument("node")
-        args = parser.parse_args()
-        node = args.get("node")
+        node = helpers.parse_get("node")
         node_path = helpers.sanitize_filename(node)
         _,directories,files = next(os.walk('files/'+node_path))
         return {
@@ -108,7 +114,19 @@ class folder(Resource):
         except:
             return "Wrong path", 400
         
-        return {"success": True}
+        return helpers.SUCCESS
+
+    def delete(self):
+        node = helpers.parse_get("node")
+        if node:
+            node_path = helpers.sanitize_filename(node)
+            try:
+                shutil.rmtree('files/'+node_path)
+            except:
+                return "Error of some sort", 400
+        else:
+            return "Oh you sneaky sneaky ! Can't remove root dir sorry",1337
+        return helpers.SUCCESS
 
 
 

@@ -9,7 +9,9 @@ eg:
 import string
 import base64
 import hashlib
+from flask_restful import reqparse
 
+SUCCESS = {'success':True}
 
 def md5sum(path):
     "return the md5sum of a file"
@@ -29,3 +31,9 @@ def sanitize_filename(a: str):
         filename += i
 
     return filename
+
+def parse_get(param):
+    parser = reqparse.RequestParser()
+    parser.add_argument(param)
+    args = parser.parse_args()
+    return args.get(param)
