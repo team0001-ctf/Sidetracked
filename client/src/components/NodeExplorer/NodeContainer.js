@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
-import NodeOperations from './NodeOperations/NodeOperations.js'
-import NodeDelete from './NodeOperations/NodeDelete.js'
 import NodeChild from './NodeChild.js'
+import displayOperations from './NodeOperations/DisplayOperations'
 
-import {createFile, createFolder} from './../../utils/NodeActions.js'
-
-const NodeContainer = ({name,path,currentFile,setCurrentFile}) => {
+const NodeContainer = ({name,path,currentFile,setCurrentFile,update,updater}) => {
   var [active, setActive] = useState(false);
   var [operationType, setOperationType] = useState(null);
   var [children, setChildren] = useState({})
+  var [actionPath, setActionPath] = useState('')
   
   const _onToggle = () => {
     setActive(!active);
@@ -18,47 +16,21 @@ const NodeContainer = ({name,path,currentFile,setCurrentFile}) => {
   
   const _doAddFile = () =>{
     setOperationType('AddFile');
+    setActionPath(path)
   }
   
   const _doAddFolder = () =>{
     setOperationType('AddFolder');
+    setActionPath(path)
   }
 
   const _doDelete = () => {
-    setOperationType('DeleteFile');
+    setOperationType('DeleteFolder');
+    setActionPath(path)
   }
   
-  const displayOperation = () => {
-    switch(operationType){
-      case "AddFile":
-        return <NodeOperations 
-          operation={operationType}
-          setOperationType={setOperationType}
-          placeholder="Enter File Name"
-          path={path}
-          action={createFile}
-        />
-      case "AddFolder":
-        return <NodeOperations 
-          operation={operationType}
-          setOperationType={setOperationType}
-          placeholder="Enter Folder Name"
-          path={path}
-          action={createFolder}
-        />
-      case "DeleteFile":
-        return <NodeDelete 
-          setOperationType={setOperationType}
-          name={name}
-        />
-      default:
-          setOperationType(null)
-      }
-  }
-
   useEffect(()=>{
-    path = (typeof path !== 'undefined') ? path : '/'
-    axios.get(`/api/folder/?node=${path}`)
+    axios.get(`/api/folder/?node=${(typeof path !== 'undefined') ? path : '/'}`)
       .then((res)=>{
           const childs = res.data;
           delete childs.node;
@@ -67,36 +39,47 @@ const NodeContainer = ({name,path,currentFile,setCurrentFile}) => {
       .then((child)=>{
         setChildren(child)
       })
-  },[active,operationType])
+      .catch(err=>{
+                
+      })
+  },[active,operationType,path,update])
 
   const displayChildren = () =>{
     return children.dir_children.map((elem)=>
       <NodeContainer 
+        key={elem}
         name={elem}
         path={path+elem+'/'}
         currentFile={currentFile}
         setCurrentFile={setCurrentFile}
+        updater={updater}
       />
     ).concat(children.files_children.map((elem)=>
-      <NodeChild 
+      <NodeChild
+        key={elem}
         name={elem}
         path={path+elem}
         currentFile={currentFile}
         setCurrentFile={setCurrentFile}
+        setOperationType={setOperationType}
+        setActionPath={setActionPath}
       />
     ))
   }
 
   return (
     <div id="Node-Handler">
-      {operationType ? displayOperation() : null}
+      {operationType ? displayOperations(operationType,setOperationType,actionPath,name,updater) : null}
       <div id="Node-Options">
         <span id="Node-Expander" onClick={_onToggle}>{ active ? '-' : '>'}</span>
         <span id="Node-Name">{name}</span>
         <div>
           <span id="Add-Node" onClick={_doAddFile}>+</span>
-          <img src={process.env.PUBLIC_URL + '/folder.svg'} onClick={_doAddFolder} id="Add-Folder"/>
-          <img src={process.env.PUBLIC_URL + '/dustbin.svg'} id="Remove-Node" onClick={_doDelete}/>
+          <img src={process.env.PUBLIC_URL + '/folder.svg'} onClick={_doAddFolder} id="Add-Folder" alt='F'/>
+          {(path !== '/') 
+            ? <img src={process.env.PUBLIC_URL + '/dustbin.svg'} alt='D' id="Remove-Node" onClick={_doDelete} /> 
+            : null 
+          }
         </div>
       </div>
       <div id='Child-Node'>

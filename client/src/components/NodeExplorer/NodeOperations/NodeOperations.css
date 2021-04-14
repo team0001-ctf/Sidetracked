@@ -54,6 +54,6 @@
 #Overlay-Content:focus{
     outline-width: 0;
 }
-#Overlay-Container>input[type=image]{
+.Overlay-Container>input[type="image"]{
   padding:8px;
 }
