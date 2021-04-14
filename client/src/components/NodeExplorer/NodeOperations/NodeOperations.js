@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './NodeOperations.css'
 
-const NodeOperations = ({operation,setOperationType,placeholder,path,action}) => {
+const NodeOperations = ({operation,setOperationType,placeholder,path,action,nodeUpdate}) => {
   
   var [value, setValue] = useState('');
 
@@ -17,7 +17,7 @@ const NodeOperations = ({operation,setOperationType,placeholder,path,action}) =>
 
   const _handleSubmit = (e) =>{
     e.preventDefault()
-    action(path+value)
+    action(path+value,nodeUpdate)
     setOperationType(null)
   }
   return (

@@ -1,9 +1,14 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
-const NodeContainer = ({name,path,currentFile,setCurrentFile}) => {
+const NodeChild = ({name,path,currentFile,setCurrentFile,setOperationType,setActionPath}) => {
+  
   const _onClick = () => {
     setCurrentFile(path);
-    console.log(path)
+  }
+  
+  const  _doDelete = () => {
+    setActionPath(path);
+    setOperationType('DeleteFile');
   }
 
   return (
@@ -12,11 +17,11 @@ const NodeContainer = ({name,path,currentFile,setCurrentFile}) => {
         <span id="Node-Expander">*</span>
         <span id="Node-Name">{name}</span>
         <div>
-          <img src={process.env.PUBLIC_URL + '/dustbin.svg'} id="Remove-Node"/>
+          <img src={process.env.PUBLIC_URL + '/dustbin.svg'} id="Remove-Node" alt='D' onClick={_doDelete}/>
         </div>
       </div>
     </div>
   )
 }
 
-export default NodeContainer
+export default NodeChild
