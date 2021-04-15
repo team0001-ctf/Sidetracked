@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react"
 import {Editor, EditorState, RichUtils } from "draft-js"
 import axios from 'axios'
 import Base64 from 'crypto-js/enc-base64';
+import utf8 from 'crypto-js/enc-utf8';
 
 import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { stateToMarkdown } from "draft-js-export-markdown";
@@ -39,7 +40,7 @@ const TextArea = ({currentFile,setCurrentFile}) => {
       axios.get(`/api/file/?file=${currentFile}`)
         .then((res)=>{
           let file = res.data.encoded_file
-          let contentState = stateFromMarkdown(Base64.parse(file));
+          let contentState = stateFromMarkdown(atob(file));
           setEditorState(EditorState.createWithContent(contentState))
         })
     }
@@ -47,7 +48,7 @@ const TextArea = ({currentFile,setCurrentFile}) => {
 
   const _save = () =>{
     
-    let content = Base64.stringify(stateToMarkdown(editorState.getCurrentContent()));
+    let content = Base64.stringify(utf8.parse(stateToMarkdown(editorState.getCurrentContent())));
     let data={
       path:currentFile,
       data:content
