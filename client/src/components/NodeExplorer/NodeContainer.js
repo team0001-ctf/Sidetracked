@@ -45,7 +45,8 @@ const NodeContainer = ({name,path,currentFile,setCurrentFile,update,updater}) =>
   },[active,operationType,path,update])
 
   const displayChildren = () =>{
-    return children.dir_children.map((elem)=>
+    return ((typeof(children)==='object') 
+    ? children.dir_children.map((elem)=>
       <NodeContainer 
         key={elem}
         name={elem}
@@ -65,6 +66,8 @@ const NodeContainer = ({name,path,currentFile,setCurrentFile,update,updater}) =>
         setActionPath={setActionPath}
       />
     ))
+    :null
+    )
   }
 
   return (

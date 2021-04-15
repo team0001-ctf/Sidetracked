@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react"
 import {Editor, EditorState, RichUtils } from "draft-js"
 import axios from 'axios'
+import Base64 from 'crypto-js/enc-base64';
 
 import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { stateToMarkdown } from "draft-js-export-markdown";
@@ -11,6 +12,7 @@ import InlineStyleControls from './StyleControls/InlineStyleControls.js'
 import './TextArea.css'
 
 const TextArea = ({currentFile,setCurrentFile}) => {
+  
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   
   const handleKeyCommand = useCallback((command, editorState) => {
@@ -22,19 +24,30 @@ const TextArea = ({currentFile,setCurrentFile}) => {
     return "not-handled"
   })
 
+  const handlePaste = (text) =>{
+    try {
+      let contentState = stateFromMarkdown(text);
+      setEditorState(EditorState.createWithContent(contentState))
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   useEffect(()=>{
     if(currentFile){
       axios.get(`/api/file/?file=${currentFile}`)
         .then((res)=>{
           let file = res.data.encoded_file
-          let contentState = stateFromMarkdown(atob(file));
+          let contentState = stateFromMarkdown(Base64.parse(file));
           setEditorState(EditorState.createWithContent(contentState))
         })
     }
   },[currentFile])
 
   const _save = () =>{
-    let content = btoa(stateToMarkdown(editorState.getCurrentContent()))
+    
+    let content = Base64.stringify(stateToMarkdown(editorState.getCurrentContent()));
     let data={
       path:currentFile,
       data:content
@@ -84,6 +97,7 @@ const TextArea = ({currentFile,setCurrentFile}) => {
           <div className="Vertical-Divider"></div>
         </div>
         <Editor
+          handlePastedText={handlePaste}
           textAlignment='left'
           blockStyleFn={getBlockStyle}
           editorState={editorState} 
