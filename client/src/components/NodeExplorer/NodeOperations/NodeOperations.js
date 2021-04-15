@@ -17,8 +17,10 @@ const NodeOperations = ({operation,setOperationType,placeholder,path,action,node
 
   const _handleSubmit = (e) =>{
     e.preventDefault()
-    action(path+value,nodeUpdate)
-    setOperationType(null)
+    if(value.trim() !== ''){
+        action(path+value,nodeUpdate)
+        setOperationType(null)
+    }
   }
   return (
     <div id='Operation-Overlay' onClick={_onClick}>

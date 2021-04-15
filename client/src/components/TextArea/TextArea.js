@@ -34,8 +34,23 @@ const TextArea = ({currentFile,setCurrentFile}) => {
   },[currentFile])
 
   const _save = () =>{
-    console.log(stateToMarkdown(editorState.getCurrentContent())
-  )}
+    let content = btoa(stateToMarkdown(editorState.getCurrentContent()))
+    let data={
+      path:currentFile,
+      data:content
+    }
+    axios.post(`/api/file/`,data)
+      .then(res=>{
+          console.log(res.status)
+      })
+  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      _save()
+    }, 300000);
+
+    return () => clearInterval(interval);
+  }, [])
 
   const _toggleBlockType = useCallback((blockType) => {
     setEditorState(RichUtils.toggleBlockType(editorState,blockType))

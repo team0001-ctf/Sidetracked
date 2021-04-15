@@ -133,10 +133,13 @@ sidetracked-frontend/node_modules
 sidetracked-frontend/package-lock.json
 sidetracked-frontend/.gitignore
 
+#UserFiles
+files/
 
 #CollinFrontend-Gitignore
 
 # dependencies
+client/build.zip
 client/node_modules
 client/.pnp
 client/.pnp.js

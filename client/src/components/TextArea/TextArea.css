@@ -16,6 +16,21 @@
     bottom: 0px;
     right: 0px;
     margin: 5%;
+    border:0;
+    background:transparent;
+    font-weight:900;
+    font-size: 26px;
+    padding:5px 10px;
+    border-radius:5px;
+}
+
+#save:active{
+  outline:0;
+}
+
+#save:hover{
+  background:black;
+  color:white;
 }
 .Controls-Container{
   display: flex;
