@@ -45,29 +45,30 @@ const NodeContainer = ({name,path,currentFile,setCurrentFile,update,updater}) =>
   },[active,operationType,path,update])
 
   const displayChildren = () =>{
-    return ((typeof(children)==='object') 
-    ? children.dir_children.map((elem)=>
-      <NodeContainer 
-        key={elem}
-        name={elem}
-        path={path+elem+'/'}
-        currentFile={currentFile}
-        setCurrentFile={setCurrentFile}
-        updater={updater}
-      />
-    ).concat(children.files_children.map((elem)=>
-      <NodeChild
-        key={elem}
-        name={elem}
-        path={path+elem}
-        currentFile={currentFile}
-        setCurrentFile={setCurrentFile}
-        setOperationType={setOperationType}
-        setActionPath={setActionPath}
-      />
-    ))
-    :null
-    )
+    if(children.dir_children && children.files_children){
+        return children.dir_children.map((elem)=>
+          <NodeContainer 
+            key={elem}
+            name={elem}
+            path={path+elem+'/'}
+            currentFile={currentFile}
+            setCurrentFile={setCurrentFile}
+            updater={updater}
+          />
+        ).concat(children.files_children.map((elem)=>
+          <NodeChild
+            key={elem}
+            name={elem}
+            path={path+elem}
+            currentFile={currentFile}
+            setCurrentFile={setCurrentFile}
+            setOperationType={setOperationType}
+            setActionPath={setActionPath}
+          />
+        ))
+     }else{
+        return null;
+     }
   }
 
   return (
