@@ -43,19 +43,9 @@ EXPOSE 443
 COPY nginx_config /etc/nginx/sites-enabled/default
 
 
-# setup permissions
-RUN useradd -m sidetracked
-RUN chown sidetracked /home/sidetracked
-RUN chgrp sidetracked /home/sidetracked
-RUN chmod -R u+wrx /home/sidetracked
-RUN chmod -R g+wrx /home/sidetracked
-
-
-# set user and work dir
-# USER sidetracked
-WORKDIR /home/sidetracked
-
+RUN mkdir /sidetracked
+WORKDIR /sidetracked
 
 
 # run
-CMD cd /home/sidetracked/docker/; ./deploy.sh
+CMD cd /sidetracked/docker/; ./deploy.sh

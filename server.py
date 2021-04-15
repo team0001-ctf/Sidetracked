@@ -136,8 +136,8 @@ api.add_resource(folder,'/api/folder/')
 api.add_resource(files, '/api/file/')
 
 
-
-if __name__ == "__main__":
+# had to move the setup folder out here because it will not be run as __main__ in prod
+def setup():
     # make sure the files folder exists
     if not os.path.exists("files/"):
         os.mkdir('files')
@@ -151,7 +151,10 @@ if __name__ == "__main__":
     elif not os.path.isdir('static'):
         print('static has to be a folder')
         sys.exit(-1)
+setup()
 
+
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 
 

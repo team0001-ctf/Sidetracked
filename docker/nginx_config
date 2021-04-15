@@ -1,9 +1,9 @@
 server {
     listen 80;
-    server_name <REPLACE_SERVER_HOSTNAME>;
+    server_name sidetracked.hopto.org;
 
     location ~ /.well-known {
-        root /home/teahaz/static;
+        root /sidetracked/static;
     }
 
     location / {
@@ -15,17 +15,17 @@ server {
 
 server {
     listen 443 ssl;
-    server_name <REPLACE_SERVER_HOSTNAME>;
-    ssl_certificate /home/teahaz/.keys/live/<REPLACE_SERVER_HOSTNAME>/fullchain.pem;
-    ssl_certificate_key /home/teahaz/.keys/live/<REPLACE_SERVER_HOSTNAME>/privkey.pem;
-    client_max_body_size 1G;
+    server_name sidetracked.hopto.org;
+    ssl_certificate /sidetracked/.keys/live/sidetracked.hopto.org/fullchain.pem;
+    ssl_certificate_key /sidetracked/.keys/live/sidetracked.hopto.org/privkey.pem;
+    client_max_body_size 10G;
 
     location ~ /.well-known {
-        root /home/teahaz/static;
+        root /sidetracked/static;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://localhost:13337;
+        proxy_pass http://localhost:5000;
     }
 }
