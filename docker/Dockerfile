@@ -40,7 +40,7 @@ RUN pip3 install gunicorn
 
 EXPOSE 80
 EXPOSE 443
-COPY nginx_config /etc/nginx/sites-enabled/default
+COPY /Sidetracked/docker/nginx_config /etc/nginx/sites-enabled/default
 
 
 RUN mkdir /sidetracked
