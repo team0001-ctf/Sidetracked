@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react"
-import {Editor, EditorState, RichUtils } from "draft-js"
+import {Editor, EditorState, RichUtils,Modifier} from "draft-js"
 import axios from 'axios'
 import Base64 from 'crypto-js/enc-base64';
 import utf8 from 'crypto-js/enc-utf8';
@@ -27,8 +27,14 @@ const TextArea = ({currentFile,setCurrentFile}) => {
 
   const handlePaste = (text) =>{
     try {
-      let contentState = stateFromMarkdown(text);
-      setEditorState(EditorState.createWithContent(contentState))
+      const pastedBlocks = stateFromMarkdown(text.replaceAll('\n','\n\n')).blockMap;
+      const newState = Modifier.replaceWithFragment(
+          editorState.getCurrentContent(),
+          editorState.getSelection(),
+          pastedBlocks,
+      );
+      const newEditorState = EditorState.push(editorState, newState, "insert-fragment");
+      setEditorState(newEditorState)
       return true;
     } catch (error) {
       return false;
