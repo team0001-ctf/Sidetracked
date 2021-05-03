@@ -1,5 +1,6 @@
 import axios from 'axios'
-const createFile = (path,nodeUpdate) =>{
+
+const createFile = (path) =>{
   let data = {
     path:path+'.md',
     data:""
@@ -7,26 +8,20 @@ const createFile = (path,nodeUpdate) =>{
   axios.post('/api/file/',data)
 }
 
-const createFolder = (path,nodeUpdate) =>{
+const createFolder = (path) =>{
   let data = {
     path:path
   }
   axios.post('/api/folder/',data)
 }
 
-const deleteFile = (path,nodeUpdate) =>{
+const deleteFile = (path) =>{
   axios.delete(`/api/file/?file=${path}`)
 
 }
 
-const deleteFolder = (path,nodeUpdate) =>{
+const deleteFolder = (path) =>{
   axios.delete(`/api/folder/?node=${path.slice(0,-1)}`)
-    .then((res)=>{
-        console.log(res.status)
-        if(res.status==200){
-            nodeUpdate()
-        }
-    })
 }
 
 export {

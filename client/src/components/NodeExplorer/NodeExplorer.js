@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './NodeExplorer.css'
 
-import NodeContainer from './NodeContainer.js'
+import ParentNode from './Nodes/ParentNode'
 
 const NodeExplorer = ({currentFile,setCurrentFile}) => {
   var [update, setUpdate] = useState(false)
@@ -17,8 +17,8 @@ const NodeExplorer = ({currentFile,setCurrentFile}) => {
         <div className="Vertical-Divider"></div>
       </div>
       <div id="Nodes">
-        <NodeContainer 
-          name="Root"
+        
+        <ParentNode 
           path='/'
           currentFile={currentFile}
           setCurrentFile={setCurrentFile}

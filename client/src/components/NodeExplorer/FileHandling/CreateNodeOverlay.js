@@ -1,13 +1,16 @@
 import React,{useState} from 'react'
+
+import {createFile, createFolder} from '../../../utils/FileHandling'
+
 import './NodeOperations.css'
 
-const NodeOperations = ({operation,setOperationType,placeholder,path,action,nodeUpdate}) => {
+const CreateNode = ({name,path,isFile,setOverlayType}) => {
   
   var [value, setValue] = useState('');
 
   const _onClick = (e) => {
     if(e.target==e.currentTarget){
-      setOperationType(null)
+      setOverlayType(null)
     }
   }
   
@@ -18,8 +21,12 @@ const NodeOperations = ({operation,setOperationType,placeholder,path,action,node
   const _handleSubmit = (e) =>{
     e.preventDefault()
     if(value.trim() !== ''){
-        action(path+value,nodeUpdate)
-        setOperationType(null)
+      if(isFile){
+        createFile(path+value)
+      }else{
+        createFolder(path+value)
+      }
+      setOverlayType(null)
     }
   }
   return (
@@ -28,7 +35,7 @@ const NodeOperations = ({operation,setOperationType,placeholder,path,action,node
         <input id="Overlay-Content" type='text' 
           value={value} 
           onChange={onChange} 
-          placeholder={placeholder} 
+          placeholder={'Collin'} 
         />
         <input type='image' src={process.env.PUBLIC_URL+'/check.svg'} />
       </form>
@@ -36,4 +43,4 @@ const NodeOperations = ({operation,setOperationType,placeholder,path,action,node
   )
 }
 
-export default NodeOperations
+export default CreateNode

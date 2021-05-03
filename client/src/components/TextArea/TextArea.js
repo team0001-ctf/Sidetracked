@@ -53,7 +53,6 @@ const TextArea = ({currentFile,setCurrentFile}) => {
   },[currentFile])
 
   const _save = () =>{
-    
     let content = Base64.stringify(utf8.parse(stateToMarkdown(editorState.getCurrentContent())));
     let data={
       path:currentFile,

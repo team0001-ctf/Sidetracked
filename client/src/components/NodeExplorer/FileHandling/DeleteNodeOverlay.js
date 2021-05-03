@@ -1,20 +1,26 @@
 import React from 'react'
 
-const NodeDelete = ({setOperationType,name,path,action,nodeUpdate}) => {
+import {deleteFile,deleteFolder} from '../../../utils/FileHandling'
+
+const DeleteNode = ({name,path,isFile,setOverlayType}) => {
 
   const _onClick = (e) => {
     if(e.target==e.currentTarget){
-      setOperationType(null)
+      setOverlayType(null)
     }
   }
   
   const _onSubmit = () =>{
-    action(path,nodeUpdate)
-    setOperationType(null)
+    if(isFile){
+      deleteFile(path)
+    }else{
+      deleteFolder(path)
+    }
+    setOverlayType(null)
   }
   
   const _onCancel = () =>{
-    setOperationType(null)
+    setOverlayType(null)
   }
 
   return (
@@ -31,4 +37,4 @@ const NodeDelete = ({setOperationType,name,path,action,nodeUpdate}) => {
   )
 }
 
-export default NodeDelete
+export default DeleteNode;
