@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import {Editor, EditorState, RichUtils,Modifier} from "draft-js"
 import axios from 'axios'
 import Base64 from 'crypto-js/enc-base64';
@@ -16,14 +16,14 @@ const TextArea = ({currentFile,setCurrentFile}) => {
   
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   
-  const handleKeyCommand = useCallback((command, editorState) => {
+  const handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) {
       setEditorState(newState)
       return "handled"
     }
     return "not-handled"
-  })
+  }
 
   const handlePaste = (text) =>{
     try {
@@ -46,22 +46,24 @@ const TextArea = ({currentFile,setCurrentFile}) => {
       axios.get(`/api/file/?file=${currentFile}`)
         .then((res)=>{
           let file = res.data.encoded_file
-          let contentState = stateFromMarkdown(atob(file));
+          let contentState = stateFromMarkdown(utf8.stringify(Base64.parse(file)));
           setEditorState(EditorState.createWithContent(contentState))
         })
     }
   },[currentFile])
 
-  const _save = () =>{
-    let content = Base64.stringify(utf8.parse(stateToMarkdown(editorState.getCurrentContent())));
-    let data={
-      path:currentFile,
-      data:content
+  const _save = () => {
+    if(currentFile){
+      let content = Base64.stringify(utf8.parse(stateToMarkdown(editorState.getCurrentContent())));
+      let data={
+        path:currentFile,
+        data:content
+      }
+      axios.post(`/api/file/`,data)
+        .then(res=>{
+            console.log(res.status)
+        })
     }
-    axios.post(`/api/file/`,data)
-      .then(res=>{
-          console.log(res.status)
-      })
   }
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,15 +71,15 @@ const TextArea = ({currentFile,setCurrentFile}) => {
     }, 300000);
 
     return () => clearInterval(interval);
-  }, [])
+  })
 
-  const _toggleBlockType = useCallback((blockType) => {
+  const _toggleBlockType = (blockType) => {
     setEditorState(RichUtils.toggleBlockType(editorState,blockType))
-  })
+  }
   
-  const _toggleInlineStyle = useCallback((blockType) => {
+  const _toggleInlineStyle = (blockType) => {
     setEditorState(RichUtils.toggleInlineStyle(editorState,blockType))
-  })
+  }
   
   function getBlockStyle(block) {
       switch (block.getType()) {

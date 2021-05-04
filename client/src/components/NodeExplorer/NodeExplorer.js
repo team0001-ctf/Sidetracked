@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+
 import './NodeExplorer.css'
 
 import ParentNode from './Nodes/ParentNode'
@@ -11,7 +12,7 @@ const NodeExplorer = ({currentFile,setCurrentFile}) => {
   }
   
   return (
-    <div id="Node-Explorer">
+    <div className="node-explorer">
       <div className='Heading'>
         <div className='header'>Directories</div>
         <div className="Vertical-Divider"></div>

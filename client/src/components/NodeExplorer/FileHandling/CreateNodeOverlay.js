@@ -2,14 +2,12 @@ import React,{useState} from 'react'
 
 import {createFile, createFolder} from '../../../utils/FileHandling'
 
-import './NodeOperations.css'
-
 const CreateNode = ({name,path,isFile,setOverlayType}) => {
   
   var [value, setValue] = useState('');
 
   const _onClick = (e) => {
-    if(e.target==e.currentTarget){
+    if(e.target===e.currentTarget){
       setOverlayType(null)
     }
   }
@@ -37,7 +35,7 @@ const CreateNode = ({name,path,isFile,setOverlayType}) => {
           onChange={onChange} 
           placeholder={'Collin'} 
         />
-        <input type='image' src={process.env.PUBLIC_URL+'/check.svg'} />
+        <input type='image' src={process.env.PUBLIC_URL+'/check.svg'} alt='ok' />
       </form>
     </div>
   )

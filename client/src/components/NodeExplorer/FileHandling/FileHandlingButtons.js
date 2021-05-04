@@ -3,6 +3,8 @@ import React,{useState} from 'react'
 import CreateNodeOverlay from './CreateNodeOverlay'
 import DeleteNodeOverlay from './DeleteNodeOverlay'
 
+import './FileHandlingButtons.css'
+
 const FileHandlingButtons = ({name,path,isFolder}) => {
   
   var [overlayType,setOverlayType] = useState(null);
@@ -42,7 +44,7 @@ const FileHandlingButtons = ({name,path,isFolder}) => {
   };
 
   return(
-    <div id="File-Handling">
+    <div className="file-handling">
         { isFolder ? <span  onClick={_doAddFile}>+</span> : null}
         { isFolder ? <img src={process.env.PUBLIC_URL + '/folder.svg'} onClick={_doAddFolder} alt='F'/> : null}
         <img src={process.env.PUBLIC_URL + '/dustbin.svg'} alt='D' onClick={_doDelete} />

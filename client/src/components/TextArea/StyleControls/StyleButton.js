@@ -1,15 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 const StyleButton = (props) => {
-  const [isActive, setActive] = useState(props.active);
-
+  
   const handleToggle = () => {
-    setActive(!isActive);
     props.onToggle(props.style);
   };
 
   return (
-    <button className={isActive ? "StyleButton StyleButton-Active" : "StyleButton"} onClick={handleToggle}>
+    <button className={props.activeStyle.includes(props.style) ? "StyleButton StyleButton-Active" : "StyleButton"} onClick={handleToggle}>
         {props.label}
     </button>
   )

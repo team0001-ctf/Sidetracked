@@ -24,7 +24,7 @@ const BlockStyleControls = (props) => {
   const buttons = BLOCK_TYPES.map((type)=>
     <StyleButton
       key={type.label}
-      active={type.style === blockType}
+      activeStyle={blockType}
       label={type.label}
       onToggle={props.onToggle}
       style={type.style}

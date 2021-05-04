@@ -13,7 +13,7 @@ const InlineStyleControls = (props) => {
   const buttons = INLINE_STYLES.map((type)=>
     <StyleButton
       key={type.label}
-      active={currentStyle.has(type.style)}
+      activeStyle={currentStyle.toString()}
       label={type.label}
       onToggle={props.onToggle}
       style={type.style}

@@ -5,7 +5,7 @@ import {deleteFile,deleteFolder} from '../../../utils/FileHandling'
 const DeleteNode = ({name,path,isFile,setOverlayType}) => {
 
   const _onClick = (e) => {
-    if(e.target==e.currentTarget){
+    if(e.target===e.currentTarget){
       setOverlayType(null)
     }
   }

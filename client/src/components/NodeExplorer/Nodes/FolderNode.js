@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios';
+import React, {useState} from 'react'
 
 import ParentNode from './ParentNode'
 import FileHandlingButtons from '../FileHandling/FileHandlingButtons'
@@ -13,8 +12,8 @@ const FolderNode = ({name,path,currentFile,setCurrentFile,update,updater}) => {
   
   return (
     <div id="Node-Handler">
-      <div id="Node-Options">
-        <span id="Node-Expander" onClick={_onToggle}>{ !collapsed ? '-' : '>'}</span>
+      <div id="Node-Options" >
+        <span id="Node-Expander" onClick={_onToggle}>{ !collapsed ? '\u25BE' : '\u25B8'}</span>
         <span id="Node-Name">{name}</span>
         <FileHandlingButtons 
           name={name}

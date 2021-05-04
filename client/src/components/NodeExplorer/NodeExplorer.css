@@ -1,4 +1,4 @@
-#Node-Explorer{
+.node-explorer{
   display: flex;
   flex-flow: column;
   border:1px solid black;
