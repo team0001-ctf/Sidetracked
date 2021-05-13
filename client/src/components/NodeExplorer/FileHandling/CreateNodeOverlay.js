@@ -28,12 +28,12 @@ const CreateNode = ({name,path,isFile,setOverlayType}) => {
     }
   }
   return (
-    <div id='Operation-Overlay' onClick={_onClick}>
+    <div className='Overlay' onClick={_onClick}>
       <form className="Overlay-Container" onSubmit={_handleSubmit}>
         <input id="Overlay-Content" type='text' 
           value={value} 
           onChange={onChange} 
-          placeholder={'Collin'} 
+          placeholder={isFile ? 'File Name' : 'Folder Name'} 
         />
         <input type='image' src={process.env.PUBLIC_URL+'/check.svg'} alt='ok' />
       </form>

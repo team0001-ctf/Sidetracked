@@ -3,19 +3,22 @@ import './App.css';
 import TextArea from '../TextArea/TextArea.js'
 import NodeExplorer from '../NodeExplorer/NodeExplorer.js'
 
+import Header from '../Header/Header'
+
 function App() {
   var [currentFile, setCurrentFile] = useState('')
   return (
     <div className="App">
-      <div className='outer-container'>
-        <TextArea
-          currentFile={currentFile}
-        />
-        <NodeExplorer 
-          currentFile={currentFile}
-          setCurrentFile={setCurrentFile}
-        />
-      </div>
+    <Header/>
+    <div className='main-container'> 
+    <NodeExplorer 
+        currentFile={currentFile}
+        setCurrentFile={setCurrentFile}
+      />
+      <TextArea
+        currentFile={currentFile}
+      />
+    </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react'
-
 import {deleteFile,deleteFolder} from '../../../utils/FileHandling'
+import './Overlay.css'
 
 const DeleteNode = ({name,path,isFile,setOverlayType}) => {
 
@@ -24,7 +24,7 @@ const DeleteNode = ({name,path,isFile,setOverlayType}) => {
   }
 
   return (
-    <div id="Operation-Overlay" onClick={_onClick}>
+    <div className="Overlay" onClick={_onClick}>
       <div className="Overlay-Container" id="Delete">
         <h3>Delete</h3>
         <h4>Note: This action is not reversible <br/> are you sure you want to delete<br/>{name}</h4>

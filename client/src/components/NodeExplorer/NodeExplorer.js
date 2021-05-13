@@ -13,12 +13,6 @@ const NodeExplorer = ({currentFile,setCurrentFile}) => {
   
   return (
     <div className="node-explorer">
-      <div className='Heading'>
-        <div className='header'>Directories</div>
-        <div className="Vertical-Divider"></div>
-      </div>
-      <div id="Nodes">
-        
         <ParentNode 
           path='/'
           currentFile={currentFile}
@@ -26,7 +20,6 @@ const NodeExplorer = ({currentFile,setCurrentFile}) => {
           update={update}
           updater={updater}
         />
-      </div>
     </div>
   );
 }

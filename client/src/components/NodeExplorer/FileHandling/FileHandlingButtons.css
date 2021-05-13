@@ -1,64 +1,22 @@
-.file-handling > * {
-    height: 12px;
-    padding: 0px 3px;
-}
-
-#Operation-Overlay {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-    top: -10%;
-    left: 0;
-    overflow-x: hidden;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-}
-
-.Overlay-Container{
+.file-handling{
   display:flex;
-  width: 50%;
-  padding: 3px;
-  height: 6%;
-  border-radius: 10px;
-  background: white;
-  box-shadow: 0 0 0 1px black, 
-              0 0 0 5px white, 
-              0 0 0 6px black;
-}
-
-#Delete{
-  position:relative;
-  height:35%;
-  width:25%;
+  justify-content:center;
   align-items:center;
-  flex-direction:column;
 }
-
-#Delete-Options{
-  position:absolute;
-  bottom:0;
-  padding:15px 0;
-}
-
-#Delete-Options>span{
-  padding:2px 21px;
-  margin: 0 3px;
-}
-#Delete-Options>span:hover{
-  border:1px solid black;
-  border-radius:10px;
+.file-handling-button {
+  height: 12px;
+  padding: 0px 3px;
+  line-height: 10px;
+  font-size: 16px;
 }
 
 #Overlay-Content{
   border:0;
   width:100%;
   height:100%;
+  background: transparent;
 }
 #Overlay-Content:focus{
-    outline-width: 0;
+  outline-width: 0;
 }
-.Overlay-Container>input[type="image"]{
-  padding:8px;
-}
+

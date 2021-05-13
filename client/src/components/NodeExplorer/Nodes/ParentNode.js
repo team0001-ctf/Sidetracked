@@ -48,10 +48,9 @@ const ParentNode = ({path,currentFile,setCurrentFile,update,updater}) => {
      }
   }
   return (
-  
-      <div id='Parent-Node'>
-        {displayChildren()}
-      </div>
+    <div>
+      {displayChildren()}
+    </div>
   )
 }
 export default ParentNode

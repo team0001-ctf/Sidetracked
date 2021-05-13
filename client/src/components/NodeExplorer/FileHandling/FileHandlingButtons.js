@@ -45,9 +45,9 @@ const FileHandlingButtons = ({name,path,isFolder}) => {
 
   return(
     <div className="file-handling">
-        { isFolder ? <span  onClick={_doAddFile}>+</span> : null}
-        { isFolder ? <img src={process.env.PUBLIC_URL + '/folder.svg'} onClick={_doAddFolder} alt='F'/> : null}
-        <img src={process.env.PUBLIC_URL + '/dustbin.svg'} alt='D' onClick={_doDelete} />
+        { isFolder ? <span  className='file-handling-button' onClick={_doAddFile}>+</span> : null}
+        { isFolder ? <img className='file-handling-button' src={process.env.PUBLIC_URL + '/folder.svg'} onClick={_doAddFolder} alt='F'/> : null}
+        <img className='file-handling-button' src={process.env.PUBLIC_URL + '/dustbin.svg'} alt='D' onClick={_doDelete} />
         {overlayType ? displayOverlay() : null}
     </div>
   )

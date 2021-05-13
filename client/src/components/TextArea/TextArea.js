@@ -6,9 +6,10 @@ import utf8 from 'crypto-js/enc-utf8';
 
 import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { stateToMarkdown } from "draft-js-export-markdown";
+
 import BlockStyleControls from './StyleControls/BlockStyleControls.js'
 import InlineStyleControls from './StyleControls/InlineStyleControls.js'
-
+import BlankPage from './BlankPage'
 
 import './TextArea.css'
 
@@ -89,31 +90,30 @@ const TextArea = ({currentFile,setCurrentFile}) => {
   }
 
   return (
-    <div id="TextArea">
-      <div id="TextArea-Container">
-        <div className='Controls-Container'>
-          <div id='Controls-Container-Inner'>
-            <BlockStyleControls
-              editorState={editorState}
-              onToggle={_toggleBlockType}
-            />
-            <InlineStyleControls
-              editorState={editorState}
-              onToggle={_toggleInlineStyle}
-            />
-          </div>
-          <div className="Vertical-Divider"></div>
+    <div className="text-area">
+      <div className='Controls-Container'>
+        <div>
+        <BlockStyleControls
+          editorState={editorState}
+          onToggle={_toggleBlockType}
+        />
+        <InlineStyleControls
+          editorState={editorState}
+          onToggle={_toggleInlineStyle}
+        />
         </div>
-        <Editor
+      </div>
+      <div className='editor-container'>
+        {currentFile ? <Editor
           handlePastedText={handlePaste}
           textAlignment='left'
           blockStyleFn={getBlockStyle}
           editorState={editorState} 
           handleKeyCommand={handleKeyCommand} 
           onChange={setEditorState}
-        />
+        /> :
+        <BlankPage/>}
       </div>
-      <button id='save' onClick={_save}>Save</button>
     </div>
   );
 }

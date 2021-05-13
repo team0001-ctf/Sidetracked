@@ -1,0 +1,60 @@
+.Overlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  padding-left:25vw;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Overlay-Container{
+  display: flex;
+  width: 50%;
+  padding: 3px;
+  height: 6%;
+  border-radius: 10px;
+  background: #2c2b3c;
+  color: #b1b1b1;
+}
+
+#Delete{
+  position:relative;
+  height:35%;
+  width:30%;
+  align-items:center;
+  flex-direction:column;
+}
+#Delete-Options{
+  position:absolute;
+  bottom:0;
+  padding:15px 0;
+}
+
+#Delete-Options>span{
+  padding:2px 21px;
+  margin: 0 3px;
+}
+
+#Delete-Options>span:hover{
+  background-color:#1B2432;
+  border-radius:10px;
+}
+
+.Overlay-Container>input[type="image"]{
+  padding:8px;
+}
+
+.Overlay-Container > input[type="text"]{
+  padding:0px 10px;
+  color: #b1b1b1;
+}
+
+.Overlay-Container>input[type="image"]:hover{
+    background: #1B2432;
+    border-radius: 9px;
+}

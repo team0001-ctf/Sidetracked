@@ -9,14 +9,15 @@ const FileNode = ({name,path,currentFile,setCurrentFile}) => {
   }
 
   return (
-    <div id="Node-Handler" onClick={_onClick}>
-      <div id="Node-Options">
-        <span id="Node-Expander">*</span>
-        <span id="Node-Name">{name}</span>
+    <div className="node-contianer" onClick={_onClick}>
+      { currentFile===path ? <div className='node-selected'></div> : null}
+      <div className="node-descripition">
+        <div> </div>
+        <span className="node-name">{name}</span>
         <FileHandlingButtons 
           name={name}
           path={path}
-        />  
+        />
       </div>
     </div>
   )

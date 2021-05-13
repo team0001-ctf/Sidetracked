@@ -11,8 +11,8 @@ const FolderNode = ({name,path,currentFile,setCurrentFile,update,updater}) => {
   }
   
   return (
-    <div id="Node-Handler">
-      <div id="Node-Options" >
+    <div className="node-contianer">
+      <div className="node-descripition">
         <span id="Node-Expander" onClick={_onToggle}>{ !collapsed ? '\u25BE' : '\u25B8'}</span>
         <span id="Node-Name">{name}</span>
         <FileHandlingButtons 
@@ -21,7 +21,8 @@ const FolderNode = ({name,path,currentFile,setCurrentFile,update,updater}) => {
           isFolder
         />
       </div>
-          { !collapsed
+      <div className='child-contianer'>
+        { !collapsed
           ? <ParentNode 
             path={path}
             currentFile={currentFile}
@@ -30,6 +31,7 @@ const FolderNode = ({name,path,currentFile,setCurrentFile,update,updater}) => {
             updater={updater}
           />
           : null}
+      </div>
     </div>
   )
 }

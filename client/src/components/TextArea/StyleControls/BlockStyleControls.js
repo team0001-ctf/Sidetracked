@@ -32,9 +32,9 @@ const BlockStyleControls = (props) => {
   )
   
   return (
-    <span className="RichEditor-controls">
+    < >
       {buttons}
-    </span>
+    </>
   )
 }
 

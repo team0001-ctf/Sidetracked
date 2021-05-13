@@ -20,9 +20,9 @@ const InlineStyleControls = (props) => {
     />
   )
   return (
-    <span className="RichEditor-controls">
+    < >
       {buttons}
-    </span>
+    </>
   );
 };
 

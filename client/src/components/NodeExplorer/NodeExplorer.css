@@ -1,41 +1,42 @@
 .node-explorer{
-  display: flex;
-  flex-flow: column;
-  border:1px solid black;
-  height:100%;
-  width:29%;
+  width:25%;
+  background-color:#11131F;
+  padding: 10px 30px;
+  overflow: auto;
 }
 
-.Heading{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  height: 40px;
-}
-
-.header{
-  font-size: 18px;
-  padding: 8px;
-}
-
-#Nodes{
-  overflow:auto;
-  height: 100%;
-  padding:0 50px;
-}
-
-#Node-Options>div>img{
-  height:12px;
-  padding:0 5px;
-}
-
-#Node-Options{
-    display: flex;
-    justify-content: space-between;
-    flex-flow: row;
-}
-
-#Child-Node{
+.node-contianer{
+  position:relative;
   width:100%;
-  margin:0 0 0 30px;
+}
+
+.node-selected{
+  height: 27px;
+  width: 8px;
+  background: #b1b1b1;
+  position: absolute;
+  border-radius:6px 0 0 6px;
+}
+
+.node-descripition{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items:center;
+  height:27px;
+  width:100%;
+  padding:0 10px;
+  margin:10px 0;
+  border-radius:6px;
+  background-color:#2C2B3C;
+}
+
+.node-descripition > * {
+  color:#b1b1b1;
+  cursor:default;
+}
+
+.child-contianer{
+  width:90%;
+  margin:0 0 0 10%;
 }
