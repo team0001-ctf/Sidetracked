@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import {Editor, EditorState, RichUtils,Modifier} from "draft-js"
+import {Editor, EditorState, RichUtils,Modifier, getDefaultKeyBinding, KeyBindingUtil} from "draft-js"
 import axios from 'axios'
 import Base64 from 'crypto-js/enc-base64';
 import utf8 from 'crypto-js/enc-utf8';
@@ -17,7 +17,18 @@ const TextArea = ({currentFile,setCurrentFile}) => {
   
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
   
+  const myKeyBindingFn = (e) => {
+    if (e.keyCode === 83 /* `S` key */ && KeyBindingUtil.hasCommandModifier(e)) {
+      return 'myeditor-save';
+    }
+    return getDefaultKeyBinding(e);
+  }
+
   const handleKeyCommand = (command, editorState) => {
+    if(command ==='myeditor-save'){
+      _save()
+      return "handled"
+    }
     const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) {
       setEditorState(newState)
@@ -61,11 +72,9 @@ const TextArea = ({currentFile,setCurrentFile}) => {
         data:content
       }
       axios.post(`/api/file/`,data)
-        .then(res=>{
-            console.log(res.status)
-        })
     }
   }
+
   useEffect(() => {
     const interval = setInterval(() => {
       _save()
@@ -89,6 +98,11 @@ const TextArea = ({currentFile,setCurrentFile}) => {
     }
   }
 
+  const __onChange = (state) =>{
+    //_save()
+    setEditorState(state)
+  }
+  
   return (
     <div className="text-area">
       <div className='Controls-Container'>
@@ -100,7 +114,7 @@ const TextArea = ({currentFile,setCurrentFile}) => {
         <InlineStyleControls
           editorState={editorState}
           onToggle={_toggleInlineStyle}
-        />
+        />j
         </div>
       </div>
       <div className='editor-container'>
@@ -109,8 +123,9 @@ const TextArea = ({currentFile,setCurrentFile}) => {
           textAlignment='left'
           blockStyleFn={getBlockStyle}
           editorState={editorState} 
+          keyBindingFn={myKeyBindingFn}
           handleKeyCommand={handleKeyCommand} 
-          onChange={setEditorState}
+          onChange={__onChange}
         /> :
         <BlankPage/>}
       </div>
