@@ -4,9 +4,8 @@ import axios from 'axios'
 import FileNode from './FileNode'
 import FolderNode from './FolderNode'
 
-const ParentNode = ({path,currentFile,setCurrentFile,update,updater}) => {
-  var [children, setChildren] = useState({})
-
+const ParentNode = ({name,path,currentFile,setCurrentFile,update,updater}) =>{
+  var [children,setChildren] = useState({})
   useEffect(()=>{
     axios.get(`/api/folder/?node=${path}`)
       .then((res)=>{
@@ -18,9 +17,8 @@ const ParentNode = ({path,currentFile,setCurrentFile,update,updater}) => {
         setChildren(child)
       })
       .catch(err=>{
-                
       })
-  },[path,update])
+  },[path,updater])
 
   const displayChildren = () =>{
     if(children.dir_children && children.files_children){

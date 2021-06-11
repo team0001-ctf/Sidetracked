@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 
 import './NodeExplorer.css'
 
+import RootNode from './Nodes/RootNode'
 import ParentNode from './Nodes/ParentNode'
 
 const NodeExplorer = ({currentFile,setCurrentFile}) => {
@@ -13,6 +14,7 @@ const NodeExplorer = ({currentFile,setCurrentFile}) => {
   
   return (
     <div className="node-explorer">
+        <RootNode/>
         <ParentNode 
           path='/'
           currentFile={currentFile}

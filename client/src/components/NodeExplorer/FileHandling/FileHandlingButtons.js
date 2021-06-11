@@ -5,7 +5,7 @@ import DeleteNodeOverlay from './DeleteNodeOverlay'
 
 import './FileHandlingButtons.css'
 
-const FileHandlingButtons = ({name,path,isFolder}) => {
+const FileHandlingButtons = ({name,path,isFolder,isRoot}) => {
   
   var [overlayType,setOverlayType] = useState(null);
   var [isFile, setIsFile] = useState(false);
@@ -26,7 +26,6 @@ const FileHandlingButtons = ({name,path,isFolder}) => {
   };
 
   const displayOverlay = () => {
-    console.log('create')
     if(overlayType === 'create'){
       return <CreateNodeOverlay
         path={path}
@@ -47,7 +46,7 @@ const FileHandlingButtons = ({name,path,isFolder}) => {
     <div className="file-handling">
         { isFolder ? <span  className='file-handling-button' onClick={_doAddFile}>+</span> : null}
         { isFolder ? <img className='file-handling-button' src={process.env.PUBLIC_URL + '/folder.svg'} onClick={_doAddFolder} alt='F'/> : null}
-        <img className='file-handling-button' src={process.env.PUBLIC_URL + '/dustbin.svg'} alt='D' onClick={_doDelete} />
+        { !isRoot ? <img className='file-handling-button' src={process.env.PUBLIC_URL + '/dustbin.svg'} alt='D' onClick={_doDelete} /> : null }
         {overlayType ? displayOverlay() : null}
     </div>
   )

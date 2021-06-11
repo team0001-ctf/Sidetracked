@@ -114,7 +114,7 @@ const TextArea = ({currentFile,setCurrentFile}) => {
         <InlineStyleControls
           editorState={editorState}
           onToggle={_toggleInlineStyle}
-        />j
+        />
         </div>
       </div>
       <div className='editor-container'>
