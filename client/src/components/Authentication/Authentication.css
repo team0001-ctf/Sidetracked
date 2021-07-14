@@ -1,0 +1,79 @@
+.auth-page{
+  width: 100%;
+  display:grid;
+  align-items: center; 
+  justify-items: center;
+  background-color: green;
+}
+.auth-form-container{
+  height: 70%;
+  width: 28%;
+  min-height: 450px;
+  min-width: 380px;
+  display:grid;
+  align-items: center; 
+  justify-items: center;
+  background-color: red;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.auth-form-container > div{
+  position: relative;
+  width: 200%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  left: 50%;
+  
+}
+.auth-form{
+  padding: 0 28px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.auth-form > input {
+  padding: 0px 4px;
+  height: 38px;
+  width: 100%
+}
+
+.auth-form > h2{
+  text-align: center;
+}
+
+.auth-form > div {
+  text-align: center;
+}
+
+@keyframes slideright {
+  from {
+    left: -50%;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slideleft {
+  from {
+    left: 50%;
+  }
+  to {
+    left: -50%;
+  }
+}
+.slideright-anim{
+  animation-name: slideright;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.slideleft-anim{
+  animation-name: slideleft;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
