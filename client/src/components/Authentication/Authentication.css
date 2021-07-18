@@ -3,7 +3,7 @@
   display:grid;
   align-items: center; 
   justify-items: center;
-  background-color: green;
+  background-color: #01060E;
 }
 .auth-form-container{
   height: 70%;
@@ -13,7 +13,7 @@
   display:grid;
   align-items: center; 
   justify-items: center;
-  background-color: red;
+  background-color: #11131F;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -42,10 +42,12 @@
 }
 
 .auth-form > h2{
+  color: #E5E5E5;
   text-align: center;
 }
 
 .auth-form > div {
+  color: #E5E5E5;
   text-align: center;
 }
 
